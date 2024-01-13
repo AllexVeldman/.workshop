@@ -1,2 +1,2 @@
 stow:
-	stow -v nvim
+	stow --verbose=2 nvim
