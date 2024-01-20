@@ -2,11 +2,9 @@
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
--- Set highlight on search
-vim.o.hlsearch = false
-
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -25,6 +23,8 @@ vim.o.undofile = true
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.incsearch = true
+vim.o.hlsearch = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
@@ -41,4 +41,3 @@ vim.o.termguicolors = true
 
 -- Spellcheck by default
 vim.wo.spell = true
-
