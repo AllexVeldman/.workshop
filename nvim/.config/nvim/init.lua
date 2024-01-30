@@ -16,5 +16,11 @@ require 'lsp-setup'
 require 'cmp-setup'
 require 'nvim-tree-setup'
 
+vim.api.nvim_create_user_command('ListPlugins', function()
+  local M = require('lazy')
+  for _, v in pairs(M.plugins()) do
+    vim.print(v[1])
+  end
+end, {})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
