@@ -85,6 +85,7 @@ local servers = {
       }
     }
   },
+  tsserver = {},
 }
 
 -- Setup neovim lua configuration
