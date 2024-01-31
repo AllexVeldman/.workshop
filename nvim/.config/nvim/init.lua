@@ -15,6 +15,7 @@ require 'neotest-setup'
 require 'lsp-setup'
 require 'cmp-setup'
 require 'nvim-tree-setup'
+require 'security-scan'
 
 vim.api.nvim_create_user_command('ListPlugins', function()
   local M = require('lazy')
