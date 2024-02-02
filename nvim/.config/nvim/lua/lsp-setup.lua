@@ -49,22 +49,38 @@ end
 require('mason').setup()
 require('mason-lspconfig').setup()
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
-local servers = {
-  lua_ls = {
+-- Setup neovim lua configuration
+require('neodev').setup()
+
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+-- Ensure any lspconfig servers are installed automagically
+require('mason-lspconfig').setup { automatic_installation = true }
+
+-- Setup the LSP servers
+-- :h lspconfig-all contains a list of all the available servers
+-- the default configuration per server and where to find the full configuration options
+local lspconfig = require('lspconfig')
+-- Lua
+lspconfig.lua_ls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
-  },
-  pylsp = {
+  }
+}
+-- Python
+-- https://github.com/python-lsp/python-lsp-server
+-- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
+lspconfig.pylsp.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
     pylsp = {
       plugins = {
         rope_autoimport = {
@@ -72,8 +88,15 @@ local servers = {
         },
       },
     },
-  },
-  rust_analyzer = {
+  }
+}
+-- Rust
+-- https://github.com/rust-lang/rust-analyzer
+-- https://rust-analyzer.github.io/manual.html#configuration
+lspconfig.rust_analyzer.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
     ["rust-analyzer"] = {
       check = {
         command = 'clippy',
@@ -84,31 +107,12 @@ local servers = {
         }
       }
     }
-  },
-  tsserver = {},
+  }
 }
-
--- Setup neovim lua configuration
-require('neodev').setup()
-
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
+-- TypeScript
+-- https://github.com/typescript-language-server/typescript-language-server
+-- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
+lspconfig.tsserver.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
