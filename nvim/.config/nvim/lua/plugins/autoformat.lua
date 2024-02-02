@@ -44,10 +44,14 @@ return {
           return
         end
 
+        -- Ignore clients where formatting is handles by some other system
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
-        if client.name == 'tsserver' then
-          return
+        local ignore_clients = { 'tsserver', 'pylsp' }
+        for _, name in ipairs(ignore_clients) do
+          if client.name == name then
+            return
+          end
         end
 
         -- Create an autocmd that will run *before* we save the buffer.
