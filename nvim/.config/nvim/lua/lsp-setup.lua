@@ -77,6 +77,7 @@ lspconfig.lua_ls.setup {
 -- Python
 -- https://github.com/python-lsp/python-lsp-server
 -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
+-- pylint and mypy are run by the lint plugin
 lspconfig.pylsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -84,6 +85,15 @@ lspconfig.pylsp.setup {
     pylsp = {
       plugins = {
         rope_autoimport = {
+          enabled = true
+        },
+        autopep8 = {
+          enabled = false
+        },
+        pycodestyle = {
+          enabled = false
+        },
+        pyflakes = {
           enabled = true
         },
       },

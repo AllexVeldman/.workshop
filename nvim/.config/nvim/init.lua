@@ -17,6 +17,7 @@ require 'cmp-setup'
 require 'nvim-tree-setup'
 require 'security-scan'
 require 'formatter-setup'
+require 'lint-setup'
 
 vim.api.nvim_create_user_command('ListPlugins', function()
   local M = require('lazy')

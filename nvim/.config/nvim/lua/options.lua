@@ -41,3 +41,6 @@ vim.o.termguicolors = true
 
 -- Spellcheck by default
 vim.wo.spell = true
+
+-- Diagnostic settings
+vim.diagnostic.config({ float = { source = 'if_many' } })

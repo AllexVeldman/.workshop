@@ -20,6 +20,7 @@
   "neotest-python": { "branch": "master", "commit": "2e83d2bc00acbcc1fd529dbf0a0e677cabfe6b50" },
   "neotest-rust": { "branch": "main", "commit": "392b54e18174b8c69eba779f94a9fd0b318d383e" },
   "nvim-cmp": { "branch": "main", "commit": "538e37ba87284942c1d76ed38dd497e54e65b891" },
+  "nvim-lint": { "branch": "master", "commit": "76af3422e3c82ea40adf9ade1ccf1dc1eb361789" },
   "nvim-lspconfig": { "branch": "master", "commit": "b901432100112c6d356f760be14ab1b2a44fdca0" },
   "nvim-tree.lua": { "branch": "master", "commit": "f39f7b6fcd3865ac2146de4cb4045286308f2935" },
   "nvim-treesitter": { "branch": "master", "commit": "5f950cdcb82d2cf74e6b30338897b3a4897f52b3" },
