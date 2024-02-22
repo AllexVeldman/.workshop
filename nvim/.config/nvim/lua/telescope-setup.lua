@@ -1,5 +1,6 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
     mappings = {
@@ -19,6 +20,11 @@ require('telescope').setup {
     },
     find_files = {
       hidden = true,
+    },
+    buffers = {
+      mappings = {
+        n = { ['dd'] = actions.delete_buffer },
+      }
     }
   },
 }

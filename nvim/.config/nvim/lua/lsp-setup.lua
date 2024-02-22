@@ -126,3 +126,9 @@ lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+-- CSS
+lspconfig.cssls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}

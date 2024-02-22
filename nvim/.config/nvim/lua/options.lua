@@ -43,4 +43,4 @@ vim.o.termguicolors = true
 vim.wo.spell = true
 
 -- Diagnostic settings
-vim.diagnostic.config({ float = { source = 'if_many' } })
+vim.diagnostic.config({ float = { source = true } })
