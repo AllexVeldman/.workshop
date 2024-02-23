@@ -9,6 +9,12 @@ require("formatter").setup {
   log_level = vim.log.levels.DEBUG,
   -- All formatter configurations are opt-in
   filetype = {
+    html = {
+      require("formatter.defaults.prettier"),
+    },
+    javascript = {
+      require("formatter.defaults.prettier"),
+    },
     python = {
       function()
         return {

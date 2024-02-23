@@ -47,7 +47,7 @@ return {
         -- Ignore clients where formatting is handles by some other system
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
-        local ignore_clients = { 'tsserver', 'pylsp' }
+        local ignore_clients = { 'tsserver', 'pylsp', 'html' }
         for _, name in ipairs(ignore_clients) do
           if client.name == name then
             return

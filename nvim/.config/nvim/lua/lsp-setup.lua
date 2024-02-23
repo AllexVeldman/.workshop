@@ -132,3 +132,21 @@ lspconfig.cssls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+-- HTML
+lspconfig.html.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+-- HTMX
+lspconfig.htmx.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+-- TailwindCSS
+lspconfig.tailwindcss.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
