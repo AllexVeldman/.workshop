@@ -120,8 +120,10 @@ require('lazy').setup({
     -- Test runners
     "nvim-neotest/neotest",
     dependencies = {
-      "nvim-neotest/neotest-python",
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
       "rouge8/neotest-rust"
     }
   },
@@ -140,6 +142,12 @@ require('lazy').setup({
   "github/copilot.vim",
   "mhartington/formatter.nvim",
   "mfussenegger/nvim-lint",
+  {
+    "brenoprata10/nvim-highlight-colors",
+    opts = {
+      render = 'virtual',
+    },
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.

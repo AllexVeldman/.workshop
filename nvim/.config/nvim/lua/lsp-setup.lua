@@ -128,9 +128,30 @@ lspconfig.tsserver.setup {
 }
 
 -- CSS
+-- https://github.com/microsoft/vscode-css-languageservice
 lspconfig.cssls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  settings = {
+    css = {
+      validate = true,
+      format = {
+        enable = true,
+      },
+    },
+    less = {
+      validate = true,
+      format = {
+        enable = true,
+      },
+    },
+    scss = {
+      validate = true,
+      format = {
+        enable = true,
+      },
+    },
+  }
 }
 
 -- HTML
@@ -141,12 +162,6 @@ lspconfig.html.setup {
 
 -- HTMX
 lspconfig.htmx.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
--- TailwindCSS
-lspconfig.tailwindcss.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
