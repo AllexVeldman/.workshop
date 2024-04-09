@@ -9,9 +9,14 @@ require("formatter").setup {
   log_level = vim.log.levels.DEBUG,
   -- All formatter configurations are opt-in
   filetype = {
-    -- html = {
-    --   require("formatter.defaults.prettier"),
-    -- },
+    -- Requires prettier to be configured
+    -- When using html templating, ensure you are using prettier-plugin-jinja-template
+    html = {
+      require("formatter.defaults.prettier"),
+    },
+    scss = {
+      require("formatter.defaults.prettier"),
+    },
     javascript = {
       require("formatter.defaults.prettier"),
     },

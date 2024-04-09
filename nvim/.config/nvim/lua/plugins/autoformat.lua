@@ -44,7 +44,7 @@ return {
           return
         end
 
-        -- Ignore clients where formatting is handles by some other system
+        -- Ignore clients where formatting is handled by some other system
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
         local ignore_clients = { 'tsserver', 'pylsp', 'html' }

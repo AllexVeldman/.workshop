@@ -142,24 +142,16 @@ lspconfig.tsserver.setup {
 lspconfig.cssls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  init_options = { provideFormatter = false },
   settings = {
     css = {
       validate = true,
-      format = {
-        enable = true,
-      },
     },
     less = {
       validate = true,
-      format = {
-        enable = true,
-      },
     },
     scss = {
       validate = true,
-      format = {
-        enable = true,
-      },
     },
   }
 }
