@@ -1,4 +1,13 @@
-require("nvim-tree").setup {}
+require("nvim-tree").setup {
+  filters = {
+    -- Show files/folder in .gitignore
+    git_ignored = false,
+    custom = {
+      ".git",
+      ".DS_Store",
+    }
+  }
+}
 local api = require("nvim-tree.api")
 
 -- keymap to toggle the explorer

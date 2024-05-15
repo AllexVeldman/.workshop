@@ -132,6 +132,7 @@ require('lazy').setup({
     }
   },
   -- Nvim-tree
+  -- File Explorer for Neovim
   {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
