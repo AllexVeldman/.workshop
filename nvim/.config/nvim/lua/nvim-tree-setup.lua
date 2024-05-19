@@ -3,7 +3,7 @@ require("nvim-tree").setup {
     -- Show files/folder in .gitignore
     git_ignored = false,
     custom = {
-      ".git",
+      "^.git$",
       ".DS_Store",
     }
   }

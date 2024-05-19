@@ -24,12 +24,19 @@ dap.listeners.before.event_exited.dapui_config = function()
     dapui.close()
 end
 
+local nmap = function(keys, func, desc)
+    if desc then
+        desc = 'DAP: ' .. desc
+    end
+
+    vim.keymap.set('n', keys, func, { desc = desc })
+end
+
 -- Keybindings
-vim.keymap.set('n', '<leader>bc', function() require('dap').continue() end, { desc = '[C]ontinue' })
-vim.keymap.set('n', '<leader>bo', function() require('dap').step_over() end, { desc = 'Step [O]ver' })
-vim.keymap.set('n', '<leader>bi', function() require('dap').step_into() end, { desc = 'Step [I]nto' })
-vim.keymap.set('n', '<leader>bO', function() require('dap').step_out() end, { desc = 'Step [O]ut' })
-vim.keymap.set('n', '<Leader>bt', function() require('dap').toggle_breakpoint() end, { desc = '[T]oggle Breakpoint' })
-vim.keymap.set('n', '<Leader>bs', function() require('dap').set_breakpoint() end, { desc = '[S]et Breakpoint' })
-vim.keymap.set('n', '<Leader>bd', function() require('dap').clear_breakpoints() end,
-    { desc = '[D]elete All Breakpoints' })
+nmap('<leader>bc', function() require('dap').continue() end, '[C]ontinue')
+nmap('<leader>bo', function() require('dap').step_over() end, 'Step [O]ver')
+nmap('<leader>bi', function() require('dap').step_into() end, 'Step [I]nto')
+nmap('<leader>bO', function() require('dap').step_out() end, 'Step [O]ut')
+nmap('<Leader>bt', function() require('dap').toggle_breakpoint() end, '[T]oggle Breakpoint')
+nmap('<Leader>bs', function() require('dap').set_breakpoint() end, '[S]et Breakpoint')
+nmap('<Leader>bd', function() require('dap').clear_breakpoints() end, '[D]elete All Breakpoints')
