@@ -170,3 +170,39 @@ lspconfig.htmx.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+-- CPP
+-- https://clangd.llvm.org/
+-- Don't forget to generate compile_commands.json
+-- cmake: -DCMAKE_EXPORT_COMPILE_COMMANDS=1 then simlink it to the root of the project
+-- https://clangd.llvm.org/installation#project-setup
+lspconfig.clangd.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+-- Add additional pylsp dependencies
+local pylsp = require("mason-registry").get_package("python-lsp-server")
+pylsp:on("install:success", function()
+  --TODO: extract this function as it is also usefull in DAP setup
+  local function mason_package_path(package)
+    local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
+    return path
+  end
+
+  local path = mason_package_path("python-lsp-server")
+  local command = path .. "/venv/bin/pip"
+  local args = {
+    "install",
+    "-U",
+    "rope",
+  }
+
+  require("plenary.job")
+      :new({
+        command = command,
+        args = args,
+        cwd = path,
+      })
+      :start()
+end)
