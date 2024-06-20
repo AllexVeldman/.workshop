@@ -6,7 +6,7 @@ require("neotest").setup({
     require("neotest-python")({
       dap = { justMyCode = false },
       runner = "pytest",
-      args = { "-vv" },
+      args = { "-vv", "--color=no" },
     }),
     require("neotest-rust")({}),
   },
@@ -24,8 +24,7 @@ end, { desc = '[T]est [D]ebug [N]earest' })
 vim.keymap.set('n', '<leader>tt', require('neotest').run.run_last, { desc = '[T]est Last' })
 vim.keymap.set('n', '<leader>ta', function()
   local neotest = require("neotest")
-  neotest.output_panel.open()
-  neotest.output_panel.clear()
+  neotest.summary.open()
   neotest.run.run(vim.loop.cwd())
 end, { desc = '[T]est [A]ll Files' })
 vim.keymap.set('n', '<leader>ts', require('neotest').summary.toggle, { desc = '[T]est [S]ummary' })
