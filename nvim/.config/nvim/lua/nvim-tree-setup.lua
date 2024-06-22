@@ -1,3 +1,5 @@
+-- [[ Configure nvim-tree ]]
+-- Adds an option to show a file tree in a sidebar
 require("nvim-tree").setup {
   filters = {
     -- Show files/folder in .gitignore

@@ -1,4 +1,5 @@
 -- [[ Configure Treesitter ]]
+-- Parses code to ASTs to provide syntax highlighting etc.
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()

@@ -1,3 +1,6 @@
+-- [[ Security Scan ]]
+-- List and query github security advisories for all installed plugins
+
 -- List all installed plugins
 local list_plugins = function()
   local M = require('lazy')

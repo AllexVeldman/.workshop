@@ -1,4 +1,5 @@
 -- [[ Configure Telescope ]]
+-- Fuzzy finder for files, buffers, git, grep, etc.
 -- See `:help telescope` and `:help telescope.setup()`
 local actions = require('telescope.actions')
 require('telescope').setup {
