@@ -1,34 +1,50 @@
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+local wk = require('which-key')
+wk.add({ mode = { 'n', 'v' }, '<Space>', '<Nop>', silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+wk.add({
+  { 'k', "v:count == 0 ? 'gk' : 'k'", expr = true, silent = true },
+  { 'j', "v:count == 0 ? 'gj' : 'j'", expr = true, silent = true },
+})
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+wk.add({
+  { '[d',        vim.diagnostic.goto_prev,  desc = 'Go to previous diagnostic message' },
+  { ']d',        vim.diagnostic.goto_next,  desc = 'Go to next diagnostic message' },
+  { '<leader>e', vim.diagnostic.open_float, desc = 'Open floating diagnostic message' },
+  { '<leader>q', vim.diagnostic.setloclist, desc = 'Open diagnostics list' },
+})
 
 -- Keymaps so move-line works
-vim.keymap.set('n', '˚', ":m .-2<CR>==")
-vim.keymap.set('n', '∆', ":m .+1<CR>==")
-vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv")
+wk.add({
+  {
+    mode = 'n',
+    {
+      { '˚', ":m .-2<CR>==", desc = 'Move line up' },
+      { '∆', ":m .+1<CR>==", desc = 'Move line down' },
+    }
+  },
+  {
+    mode = 'v',
+    {
+      { "˚", ":m '<-2<CR>gv=gv", desc = 'Move line up' },
+      { "∆", ":m '>+1<CR>gv=gv", desc = 'Move line down' },
+    }
+  }
+})
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = 'LSP: [D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = 'LSP: [W]orkspace', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
-  ['<leader>td'] = { name = '[T]est [D]ebug', _ = 'which_key_ignore' },
-  ['<leader>b'] = { name = '[B]reakpoint', _ = 'which_key_ignore' },
-}
+require('which-key').add(
+  {
+    { "<leader>c", group = "[C]ode" },
+    { "<leader>d", group = "LSP: [D]ocument" },
+    { "<leader>g", group = "[G]it" },
+    { "<leader>r", group = "[R]ename" },
+    { "<leader>s", group = "[S]earch" },
+    { "<leader>w", group = "LSP: [W]orkspace" },
+    { "<leader>b", group = "[B]reakpoint" },
+  }
+)
