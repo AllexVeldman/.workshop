@@ -10,6 +10,20 @@ wk.add({
   { 'j', "v:count == 0 ? 'gj' : 'j'", expr = true, silent = true },
 })
 
+-- Swap the xclipboard and the unnamed register
+wk.add({
+  {
+    '"\'',
+    function()
+      local unnamed = vim.fn.getreg('"')
+      local xclip = vim.fn.getreg('+')
+      vim.fn.setreg('+', unnamed)
+      vim.fn.setreg('"', xclip)
+    end,
+    desc = 'Swap clipboard and unnamed register'
+  },
+})
+
 -- Diagnostic keymaps
 wk.add({
   { '[d',        vim.diagnostic.goto_prev,  desc = 'Go to previous diagnostic message' },

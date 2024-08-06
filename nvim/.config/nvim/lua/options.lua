@@ -12,7 +12,11 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+--  This is disabled in favor of explicit clipboard management
+--  `"'` will swap the last-yanked text with the system clipboard so yanks form nvim can be pasted elsewhere
+--  `"+p` will paste from the system clipboard, see `:help registers`
+--  in Insert mode Ctrl-V will paste from the system clipboard
+-- vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
