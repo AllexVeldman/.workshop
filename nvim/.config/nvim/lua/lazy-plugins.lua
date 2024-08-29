@@ -146,7 +146,6 @@ require('lazy').setup({
       "NoahTheDuke/vim-just",
       ft = { "just" },
     },
-    "github/copilot.vim",
     "mhartington/formatter.nvim",
     "mfussenegger/nvim-lint",
     {
