@@ -37,15 +37,23 @@ wk.add({
   {
     mode = 'n',
     {
+      -- MacOS
       { '˚', ":m .-2<CR>==", desc = 'Move line up' },
       { '∆', ":m .+1<CR>==", desc = 'Move line down' },
+      -- Linux
+      { '<A-k>', ":m .-2<CR>==", desc = 'Move line up' },
+      { '<A-j>', ":m .+1<CR>==", desc = 'Move line down' },
     }
   },
   {
     mode = 'v',
     {
+      -- MacOS
       { "˚", ":m '<-2<CR>gv=gv", desc = 'Move line up' },
       { "∆", ":m '>+1<CR>gv=gv", desc = 'Move line down' },
+      -- Linux
+      { "<A-k>", ":m '<-2<CR>gv=gv", desc = 'Move line up' },
+      { "<A-j>", ":m '>+1<CR>gv=gv", desc = 'Move line down' },
     }
   }
 })
