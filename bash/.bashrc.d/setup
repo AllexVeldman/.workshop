@@ -18,6 +18,9 @@ PROMPT_DIRECTORY='\W$(__git_ps1 " (%s)")'
 # GIT
 export GIT_EDITOR=nvim
 
+# SSH
+eval $(ssh-agent -s)
+
 # Docker
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
