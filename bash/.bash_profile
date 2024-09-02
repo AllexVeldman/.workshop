@@ -47,3 +47,8 @@ fi
 
 # direnv
 eval "$(direnv hook bash)"
+
+#  Allow local machine add source options that are not part of .workshop
+if [ -f "~/.profile_ext" ]; then
+    . "$HOME/.profile_ext"
+fi
