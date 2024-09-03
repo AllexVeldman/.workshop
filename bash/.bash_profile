@@ -1,4 +1,5 @@
 # .bash_profile
+# Run on login, so expected to be run once.
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
