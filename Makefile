@@ -1,2 +1,2 @@
 stow:
-	stow --verbose=2 nvim tmux bash git
+	stow --verbose=2 nvim tmux bash git editor
