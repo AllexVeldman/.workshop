@@ -135,7 +135,7 @@ lspconfig.rust_analyzer.setup {
 -- TypeScript
 -- https://github.com/typescript-language-server/typescript-language-server
 -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
