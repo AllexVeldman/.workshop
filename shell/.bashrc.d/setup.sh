@@ -28,11 +28,10 @@ export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
 # Rust
-if [ -f "$HOME/.cargo/env" ]; then
-    . "$HOME/.cargo/env"
-fi
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
-
+# ASDF
+[[ -f "$HOME/.asdf/asdf.sh" ]] && . "$HOME/.asdf/asdf.sh"
 
 # direnv
 eval "$(direnv hook bash)"
