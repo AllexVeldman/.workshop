@@ -12,31 +12,27 @@ require('dap.ext.vscode').load_launchjs()
 local dap, dapui = require("dap"), require("dapui")
 dapui.setup()
 dap.listeners.before.attach.dapui_config = function()
-    dapui.open()
+  dapui.open()
 end
 dap.listeners.before.launch.dapui_config = function()
-    dapui.open()
-end
-dap.listeners.before.event_terminated.dapui_config = function()
-    dapui.close()
-end
-dap.listeners.before.event_exited.dapui_config = function()
-    dapui.close()
+  dapui.open()
 end
 
-local nmap = function(keys, func, desc)
-    if desc then
-        desc = 'DAP: ' .. desc
-    end
+local map = function(mode, keys, func, desc)
+  if desc then
+    desc = 'DAP: ' .. desc
+  end
 
-    vim.keymap.set('n', keys, func, { desc = desc })
+  vim.keymap.set(mode, keys, func, { desc = desc })
 end
 
 -- Keybindings
-nmap('<leader>bc', function() require('dap').continue() end, '[C]ontinue')
-nmap('<leader>bo', function() require('dap').step_over() end, 'Step [O]ver')
-nmap('<leader>bi', function() require('dap').step_into() end, 'Step [I]nto')
-nmap('<leader>bO', function() require('dap').step_out() end, 'Step [O]ut')
-nmap('<Leader>bt', function() require('dap').toggle_breakpoint() end, '[T]oggle Breakpoint')
-nmap('<Leader>bs', function() require('dap').set_breakpoint() end, '[S]et Breakpoint')
-nmap('<Leader>bd', function() require('dap').clear_breakpoints() end, '[D]elete All Breakpoints')
+map('n', '<F5>', function() require('dap').continue() end, '[C]ontinue')
+map('n', '<F8>', function() require('dap').step_over() end, 'Step Over')
+map('n', '<F7>', function() require('dap').step_into() end, 'Step Into')
+map('n', '<S-F8>', function() require('dap').step_out() end, 'Step Out')
+map('n', '<Leader>bt', function() require('dap').toggle_breakpoint() end, '[T]oggle Breakpoint')
+map('n', '<Leader>bs', function() require('dap').set_breakpoint() end, '[S]et Breakpoint')
+map('n', '<Leader>bd', function() require('dap').clear_breakpoints() end, '[D]elete All Breakpoints')
+map('n', '<Leader>bc', function() require('dapui').close() end, '[C]lose the debug view')
+map({ 'n', 'v' }, '<Leader>be', function() require('dapui').eval() end, '[E]valuate current cursor')

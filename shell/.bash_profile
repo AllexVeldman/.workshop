@@ -9,8 +9,8 @@ fi
 # User specific environment and startup programs
 
 # Update rust bash completions
+mkdir -p $HOME/.local/share/bash-completion/completions
 if command -v rustup &> /dev/null; then
-    mkdir -p $HOME/.local/share/bash-completion/completions
     rustup completions bash > $HOME/.local/share/bash-completion/completions/rustup
     rustup completions bash cargo > $HOME/.local/share/bash-completion/completions/cargo
 fi
@@ -19,3 +19,8 @@ fi
 [[ -f "$HOME/.asdf/completions/asdf.bash" ]] && \
     [[ ! -f "$HOME/.local/share/bash-completion/completions/asdf" ]] && \
     ln -s "$HOME/.asdf/completions/asdf.bash" "$HOME/.local/share/bash-completion/completions/asdf"
+
+# Update poetry completions
+if command -v poetry &> /dev/null; then
+    poetry completions bash > "$HOME/.local/share/bash-completion/completions/poetry"
+fi
