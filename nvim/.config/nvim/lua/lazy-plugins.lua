@@ -16,7 +16,7 @@ require('lazy').setup({
     'tpope/vim-sleuth',
 
     -- NOTE: This is where your plugins related to LSP can be installed.
-    --  The configuration is done below. Search for lspconfig to find it below.
+    --  The configuration is done in lsp-setup.lua
     {
       -- LSP Configuration & Plugins
       'neovim/nvim-lspconfig',
@@ -29,13 +29,20 @@ require('lazy').setup({
         { 'j-hui/fidget.nvim', opts = {} },
 
         -- Additional lua configuration, makes nvim stuff amazing!
-        'folke/neodev.nvim',
+        {
+          'folke/lazydev.nvim',
+          ft = "lua", -- only load on lua files
+          opts = {},
+        },
       },
     },
 
     -- Debug Adapter Protocol
     'mfussenegger/nvim-dap',
-    { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
+    {
+      'rcarriga/nvim-dap-ui',
+      dependencies = { 'nvim-neotest/nvim-nio', }
+    },
     'mfussenegger/nvim-dap-python',
 
     {
@@ -55,7 +62,7 @@ require('lazy').setup({
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim', opts = {} },
+    { 'folke/which-key.nvim',  opts = {} },
 
     {
       -- Theme inspired by Atom
