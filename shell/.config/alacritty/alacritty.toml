@@ -2,7 +2,7 @@
 startup_mode = "Maximized"
 
 [font]
-normal = { family = "HackNerdFontMono", style = "Regular" }
+normal = { family = "Hack Nerd Font Mono", style = "Regular" }
 
 [keyboard]
 bindings = [

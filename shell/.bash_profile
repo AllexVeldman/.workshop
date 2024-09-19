@@ -24,3 +24,8 @@ fi
 if command -v poetry &> /dev/null; then
     poetry completions bash > "$HOME/.local/share/bash-completion/completions/poetry"
 fi
+
+# kubectl
+if command -v kubectl &> /dev/null; then
+    kubectl completion bash > $HOME/.local/share/bash-completion/completions/kubectl
+fi

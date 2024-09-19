@@ -8,7 +8,7 @@ export LANG=en_GB.UTF-8
 # https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
 source "$HOME/.git-prompt.sh"
 # Tmux default PS1:
-PS1='${PROMPT_START@P}\[\e[${PROMPT_COLOR}m\]${PROMPT_USERHOST@P}\[\e[0m\]${PROMPT_SEPARATOR@P}\[\e[${PROMPT_DIR_COLOR:-${PROMPT_COLOR}}m\]${PROMPT_DIRECTORY@P}\[\e[0m\]${PROMPT_END@P}\$ \[\e[0m\]'
+PS1='${PROMPT_START@P}\[\e[${PROMPT_COLOR}m\]${PROMPT_USERHOST@P}\[\e[0m\]${PROMPT_SEPARATOR@P}\[\e[${PROMPT_DIR_COLOR:-${PROMPT_COLOR}}m\] ${PROMPT_DIRECTORY@P}\[\e[0m\]${PROMPT_END@P}\$ \[\e[0m\]'
 # Add colour, also for non-tmux shell
 PROMPT_COLOR=32
 # Don't show the host as part of the user

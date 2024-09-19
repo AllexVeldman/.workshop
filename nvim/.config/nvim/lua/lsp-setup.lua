@@ -85,7 +85,6 @@ lspconfig.lua_ls.setup {
 -- Python
 -- https://github.com/python-lsp/python-lsp-server
 -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
--- pylint and mypy are run by the lint plugin
 lspconfig.pylsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -104,6 +103,11 @@ lspconfig.pylsp.setup {
         pyflakes = {
           enabled = true
         },
+        pylsp_mypy = {
+          enabled = true,
+          report_progress = true,
+          dmypy = true
+        }
       },
     },
   }
@@ -177,27 +181,34 @@ lspconfig.clangd.setup {
 }
 
 -- Add additional pylsp dependencies
+-- https://github.com/williamboman/mason.nvim/blob/main/doc/reference.md#package
 local pylsp = require("mason-registry").get_package("python-lsp-server")
-pylsp:on("install:success", function()
-  --TODO: extract this function as it is also usefull in DAP setup
-  local function mason_package_path(package)
-    local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
-    return path
-  end
+pylsp:on(
+  "install:success",
+  vim.schedule_wrap(function(handle)
+    print("Installing pylsp dependencies")
+    --TODO: extract this function as it is also useful in DAP setup
+    local function mason_package_path(package)
+      local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
+      return path
+    end
 
-  local path = mason_package_path("python-lsp-server")
-  local command = path .. "/venv/bin/pip"
-  local args = {
-    "install",
-    "-U",
-    "rope",
-  }
+    local path = mason_package_path("python-lsp-server")
+    local command = path .. "/venv/bin/pip"
+    local args = {
+      "install",
+      "-U",
+      "rope",
+      "pylsp-mypy",
+      "python-lsp-ruff",
+    }
 
-  require("plenary.job")
-      :new({
-        command = command,
-        args = args,
-        cwd = path,
-      })
-      :start()
-end)
+    require("plenary.job")
+        :new({
+          command = command,
+          args = args,
+          cwd = path,
+        })
+        :start()
+  end)
+)
