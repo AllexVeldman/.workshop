@@ -85,32 +85,42 @@ lspconfig.lua_ls.setup {
 -- Python
 -- https://github.com/python-lsp/python-lsp-server
 -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-lspconfig.pylsp.setup {
+-- lspconfig.pylsp.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = {
+--     pylsp = {
+--       plugins = {
+--         rope_autoimport = {
+--           enabled = true
+--         },
+--         autopep8 = {
+--           enabled = false
+--         },
+--         pycodestyle = {
+--           enabled = false
+--         },
+--         pyflakes = {
+--           enabled = true
+--         },
+--         pylsp_mypy = {
+--           enabled = true,
+--           report_progress = true,
+--           dmypy = true
+--         }
+--       },
+--     },
+--   }
+-- }
+
+-- Python
+-- https://detachhead.github.io/basedpyright
+-- https://docs.basedpyright.com/#/settings
+lspconfig.basedpyright.setup {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
-    pylsp = {
-      plugins = {
-        rope_autoimport = {
-          enabled = true
-        },
-        autopep8 = {
-          enabled = false
-        },
-        pycodestyle = {
-          enabled = false
-        },
-        pyflakes = {
-          enabled = true
-        },
-        pylsp_mypy = {
-          enabled = true,
-          report_progress = true,
-          dmypy = true
-        }
-      },
-    },
-  }
+  },
 }
 -- Rust
 -- https://github.com/rust-lang/rust-analyzer
