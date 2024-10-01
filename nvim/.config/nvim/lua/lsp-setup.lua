@@ -174,12 +174,6 @@ lspconfig.html.setup {
   on_attach = on_attach,
 }
 
--- HTMX
-lspconfig.htmx.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
 -- CPP
 -- https://clangd.llvm.org/
 -- Don't forget to generate compile_commands.json
