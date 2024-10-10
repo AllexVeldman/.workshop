@@ -184,6 +184,22 @@ lspconfig.clangd.setup {
   on_attach = on_attach,
 }
 
+-- YAML
+-- https://github.com/redhat-developer/yaml-language-server
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
+lspconfig.yamlls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    yaml = {
+      schemaStore = { enable = false },
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = { "/.github/workflows/*" },
+      },
+    },
+  }
+}
+
 -- Add additional pylsp dependencies
 -- https://github.com/williamboman/mason.nvim/blob/main/doc/reference.md#package
 local pylsp = require("mason-registry").get_package("python-lsp-server")
