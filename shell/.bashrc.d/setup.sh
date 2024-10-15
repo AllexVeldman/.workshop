@@ -34,4 +34,5 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 [[ -f "$HOME/.asdf/asdf.sh" ]] && . "$HOME/.asdf/asdf.sh"
 
 # direnv
+export EDITOR=nvim
 eval "$(direnv hook bash)"
