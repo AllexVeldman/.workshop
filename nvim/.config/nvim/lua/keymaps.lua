@@ -62,7 +62,7 @@ wk.add({
 require('which-key').add(
   {
     { "<leader>c", group = "[C]ode" },
-    { "<leader>d", group = "LSP: [D]ocument" },
+    { "<leader>d", group = "LSP: [D]ocument, DAP: [D]ebug" },
     { "<leader>g", group = "[G]it" },
     { "<leader>r", group = "[R]ename" },
     { "<leader>s", group = "[S]earch" },
