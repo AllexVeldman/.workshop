@@ -7,27 +7,21 @@ local on_attach = function(_, bufnr)
   --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
+  local map = function(modes, keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
     end
 
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+    vim.keymap.set(modes, keys, func, { buffer = bufnr, desc = desc })
   end
-
-  local vmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('v', keys, func, { buffer = bufnr, desc = desc })
+  local nmap = function(keys, func, desc)
+    map('n', keys, func, desc)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   -- <Alt-a> is å on my keyboard layout
-  nmap('å', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  vmap('å', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  map({ 'n', 'v' }, 'å', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -38,7 +32,7 @@ local on_attach = function(_, bufnr)
 
   -- Documentation
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  map({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- LSP functionality
   -- nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')

@@ -25,9 +25,22 @@ return {
       -- Jump to symbol in source window when the cursor moves
       autojump = true,
       layout = {
-        default_direction = "prefer_left",
+        default_direction = "float",
+      },
+      float = {
+        relative = "editor",
       },
       close_automatic_events = { "unsupported" },
+      close_on_select = true,
+      keymaps = {
+        ["<CR>"] = "actions.jump",
+        ["<2-LeftMouse>"] = "actions.jump",
+        ["<leader>v"] = "actions.jump_vsplit",
+        ["<leader>s"] = "actions.jump_split",
+        ["h"] = "actions.left",
+        ["l"] = "actions.right",
+        ["<Esc>"] = "actions.close",
+      },
     })
     vim.keymap.set("n", "<leader>co", aerial.toggle, { desc = "[C]ode [O]utline" })
   end
