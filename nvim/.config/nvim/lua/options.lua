@@ -59,3 +59,6 @@ vim.wo.spell = true
 
 -- Diagnostic settings
 vim.diagnostic.config({ float = { source = true } })
+
+-- Load .nvim.lua from CWD
+vim.o.exrc = true
