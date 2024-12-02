@@ -6,7 +6,7 @@ require("formatter").setup {
   -- Enable or disable logging
   logging = true,
   -- Set the log level
-  log_level = vim.log.levels.DEBUG,
+  log_level = vim.log.levels.WARN,
   -- All formatter configurations are opt-in
   filetype = {
     -- Requires prettier to be configured
@@ -37,9 +37,8 @@ require("formatter").setup {
       end,
     },
     ["*"] = {
-      -- "formatter.filetypes.any" defines default configurations for any
-      -- filetype
-      require("formatter.filetypes.any").remove_trailing_whitespace
+      -- "formatter.filetypes.any" defines default configurations for any filetype
+      -- require("formatter.filetypes.any").remove_trailing_whitespace
     }
   }
 }
