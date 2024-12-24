@@ -29,3 +29,8 @@ fi
 if command -v kubectl &> /dev/null; then
     kubectl completion bash > $HOME/.local/share/bash-completion/completions/kubectl
 fi
+
+# Docker
+if command -v docker &> /dev/null; then
+    docker completion bash > $HOME/.local/share/bash-completion/completions/docker
+fi
