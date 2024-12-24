@@ -131,7 +131,7 @@ lspconfig.rust_analyzer.setup {
       },
       diagnostics = {
         experimental = {
-          enable = true
+          enable = false
         }
       }
     }
