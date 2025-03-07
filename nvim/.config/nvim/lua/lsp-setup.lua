@@ -182,7 +182,7 @@ lspconfig.clangd.setup {
 
 -- YAML
 -- https://github.com/redhat-developer/yaml-language-server
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
 lspconfig.yamlls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -197,10 +197,25 @@ lspconfig.yamlls.setup {
   }
 }
 
+-- JSON
+-- https://github.com/hrsh7th/vscode-langservers-extracted
+-- extracted from: https://github.com/microsoft/vscode-json-languageservice
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
+-- https://github.com/Microsoft/vscode/blob/main/extensions/json-language-features/server/README.md#settings
+lspconfig.jsonls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 -- Terraform
 -- https://github.com/hashicorp/terraform-ls
 -- https://github.com/hashicorp/terraform-ls
 lspconfig.terraformls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+lspconfig.bashls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }

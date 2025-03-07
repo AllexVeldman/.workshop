@@ -136,6 +136,7 @@ require('lazy').setup({
         "nvim-lua/plenary.nvim",
         "antoinemadec/FixCursorHold.nvim",
         "nvim-neotest/neotest-python",
+        "nvim-neotest/neotest-jest",
         "rouge8/neotest-rust"
       }
     },

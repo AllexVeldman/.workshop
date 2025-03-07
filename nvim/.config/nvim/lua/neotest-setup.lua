@@ -9,6 +9,7 @@ require("neotest").setup({
       args = { "-vv", "--color=no" },
     }),
     require("neotest-rust")({}),
+    require('neotest-jest')({}),
   },
 })
 
