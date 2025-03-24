@@ -31,7 +31,9 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # ASDF
-[[ -f "$HOME/.asdf/asdf.sh" ]] && . "$HOME/.asdf/asdf.sh"
+if ! [[ "$PATH" =~ "${ASDF_DATA_DIR:-$HOME/.asdf}/shims:" ]]; then
+    export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+fi
 
 # direnv
 export EDITOR=nvim
