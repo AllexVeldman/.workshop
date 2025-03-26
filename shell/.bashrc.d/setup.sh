@@ -20,7 +20,8 @@ PROMPT_DIRECTORY='\W$(__git_ps1 " (%s)")'
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 
-# GIT
+# Editors
+export EDITOR=nvim
 export GIT_EDITOR=nvim
 
 # Docker
@@ -36,5 +37,7 @@ if ! [[ "$PATH" =~ "${ASDF_DATA_DIR:-$HOME/.asdf}/shims:" ]]; then
 fi
 
 # direnv
-export EDITOR=nvim
 eval "$(direnv hook bash)"
+
+# homebrew
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
