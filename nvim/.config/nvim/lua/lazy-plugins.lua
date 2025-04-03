@@ -34,6 +34,12 @@ require('lazy').setup({
           ft = "lua", -- only load on lua files
           opts = {},
         },
+        -- towolf/vim-helm provides basic syntax highlighting and filetype detection for Helm
+        -- ft = 'helm' is important to not start yamlls
+        {
+          'towolf/vim-helm',
+          ft = 'helm'
+        },
       },
     },
 

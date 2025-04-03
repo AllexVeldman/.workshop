@@ -197,6 +197,13 @@ lspconfig.yamlls.setup {
   }
 }
 
+-- Helm
+-- https://github.com/mrjosh/helm-ls
+lspconfig.helm_ls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 -- JSON
 -- https://github.com/hrsh7th/vscode-langservers-extracted
 -- extracted from: https://github.com/microsoft/vscode-json-languageservice
