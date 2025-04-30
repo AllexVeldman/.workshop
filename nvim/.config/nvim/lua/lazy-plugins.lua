@@ -63,7 +63,7 @@ require('lazy').setup({
         'hrsh7th/cmp-nvim-lsp',
 
         -- Adds a number of user-friendly snippets
-        'rafamadriz/friendly-snippets',
+        -- 'rafamadriz/friendly-snippets',
       },
     },
 
@@ -108,7 +108,6 @@ require('lazy').setup({
     -- Fuzzy Finder (files, lsp, etc)
     {
       'nvim-telescope/telescope.nvim',
-      branch = '0.1.x',
       dependencies = {
         'nvim-lua/plenary.nvim',
         -- Fuzzy Finder Algorithm which requires local dependencies to be built.
