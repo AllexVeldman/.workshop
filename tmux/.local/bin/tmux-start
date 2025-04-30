@@ -2,7 +2,7 @@
 
 
 if [ "$TMUX_SESSION" = "" ]; then
-    tmux
+    tmux "$@"
     exit 0
 fi
 

@@ -8,6 +8,7 @@ alias dock-down="docker compose down"
 alias dock-login='echo $GITHUB_TOKEN | docker login -u $GITHUB_USER --password-stdin ghcr.io'
 alias listening-ports='lsof -i -P | grep -i "listen"'
 alias poetry-outdated="poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)"
+alias tmux='tmux-start'
 
 # gh aliases
 # if command -v gh &> /dev/null; then
