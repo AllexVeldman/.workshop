@@ -58,7 +58,13 @@ vim.o.termguicolors = true
 vim.wo.spell = true
 
 -- Diagnostic settings
-vim.diagnostic.config({ float = { source = true } })
+vim.diagnostic.config({
+  float = { source = true },
+  -- Show diagnostics inline
+  virtual_text = true,
+  -- Expand diagnostics on the current line
+  virtual_lines = { current_line = true },
+})
 
 -- Load .nvim.lua from CWD
 vim.o.exrc = true
