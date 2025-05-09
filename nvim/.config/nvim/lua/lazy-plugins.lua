@@ -5,14 +5,16 @@
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
+  -- Disable installing luarocks packages
+  rocks = { enabled = false },
   spec = {
     -- NOTE: First, some plugins that don't require any configuration
 
     -- Git related plugins
     'tpope/vim-fugitive',
-    'tpope/vim-rhubarb',
 
     -- Detect tabstop and shiftwidth automatically
+    -- TODO: See if we can do without vim-sleuth
     'tpope/vim-sleuth',
 
     -- NOTE: This is where your plugins related to LSP can be installed.
@@ -60,15 +62,14 @@ require('lazy').setup({
         'saadparwaiz1/cmp_luasnip',
 
         -- Adds LSP completion capabilities
+        -- TODO: Switch to builtin LSP completion support
+        --  https://gpanders.com/blog/whats-new-in-neovim-0-11/#builtin-auto-completion
         'hrsh7th/cmp-nvim-lsp',
-
-        -- Adds a number of user-friendly snippets
-        -- 'rafamadriz/friendly-snippets',
       },
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim',  opts = {} },
+    { 'folke/which-key.nvim', opts = {} },
 
     {
       -- Theme inspired by Atom
@@ -101,9 +102,6 @@ require('lazy').setup({
       main = 'ibl',
       opts = {},
     },
-
-    -- "gc" to comment visual regions/lines
-    { 'numToStr/Comment.nvim', opts = {} },
 
     -- Fuzzy Finder (files, lsp, etc)
     {
@@ -160,12 +158,16 @@ require('lazy').setup({
     },
     "mhartington/formatter.nvim",
     "mfussenegger/nvim-lint",
+    -- nvim-highlight-colors
+    -- Shows the color when it detects a color code
+    -- https://github.com/brenoprata10/nvim-highlight-colors
     {
       "brenoprata10/nvim-highlight-colors",
       opts = {
         render = 'virtual',
       },
     },
+    -- Format and highlight CSV
     "mechatroner/rainbow_csv",
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
     --       These are some example plugins that I've included in the kickstart repository.
