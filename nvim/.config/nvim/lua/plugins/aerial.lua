@@ -23,7 +23,7 @@ return {
         -- "Variable",
       },
       -- Jump to symbol in source window when the cursor moves
-      autojump = true,
+      autojump = false,
       layout = {
         default_direction = "float",
       },
