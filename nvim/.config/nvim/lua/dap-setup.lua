@@ -5,12 +5,16 @@ local python_path = table.concat({ vim.fn.stdpath('data'), 'mason', 'packages', 
 -- local python_path = vim.fn.joinpath({ vim.fn.stdpath('data'),  'mason', 'packages', 'debugpy', 'venv', 'bin', 'python' })
 require('dap-python').setup(python_path)
 
--- Load configurations from .vscode/launch.json
-require('dap.ext.vscode').load_launchjs()
-
 -- Open DAP-ui on DAP events
 local dap, dapui = require("dap"), require("dapui")
-dapui.setup()
+dapui.setup({
+  element_mappings = {
+    stacks = {
+      open = "<CR>",
+      expand = "o",
+    }
+  }
+})
 dap.listeners.before.attach.dapui_config = function()
   dapui.open()
 end
@@ -27,12 +31,14 @@ local map = function(mode, keys, func, desc)
 end
 
 -- Keybindings
-map('n', '<F5>', function() require('dap').continue() end, '[C]ontinue')
-map('n', '<F8>', function() require('dap').step_over() end, 'Step Over')
-map('n', '<F7>', function() require('dap').step_into() end, 'Step Into')
-map('n', '<S-F8>', function() require('dap').step_out() end, 'Step Out')
-map('n', '<leader>bt', function() require('dap').toggle_breakpoint() end, '[T]oggle Breakpoint')
-map('n', '<leader>bs', function() require('dap').set_breakpoint() end, '[S]et Breakpoint')
-map('n', '<leader>bd', function() require('dap').clear_breakpoints() end, '[D]elete All Breakpoints')
-map('n', '<leader>dt', function() require('dapui').toggle() end, '[T]oggle the debug view')
-map({ 'n', 'v' }, '<leader>de', function() require('dapui').eval() end, '[E]valuate current cursor')
+map('n', '<F5>', function() dap.continue() end, '[C]ontinue')
+map('n', '<F8>', function() dap.step_over() end, 'Step Over')
+map('n', '<F7>', function() dap.step_into() end, 'Step Into')
+map('n', '<S-F8>', function() dap.step_out() end, 'Step Out')
+map('n', '<leader>bt', function() dap.toggle_breakpoint() end, '[T]oggle Breakpoint')
+map('n', '<leader>bs', function() dap.set_breakpoint() end, '[S]et Breakpoint')
+map('n', '<leader>bd', function() dap.clear_breakpoints() end, '[D]elete All Breakpoints')
+map('n', '<leader>dt', function() dapui.toggle() end, '[T]oggle the debug view')
+map({ 'n', 'v' }, '<leader>de', function() dapui.eval() end, '[E]valuate current cursor')
+map('n', '<leader>du', dap.up, 'Stack [U]p')
+map('n', '<leader>dd', dap.down, 'Stack [D]own')
