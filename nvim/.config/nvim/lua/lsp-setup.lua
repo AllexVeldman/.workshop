@@ -53,21 +53,24 @@ end
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup()
-require('mason-lspconfig').setup()
+require('mason-lspconfig').setup {
+  -- Disable mason from calling vim.lsp.enable() on all installed servers
+  automatic_enable = false,
+  ensure_installed = {}
+}
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Ensure any lspconfig servers are installed automagically
-require('mason-lspconfig').setup { automatic_installation = true }
-
 -- Setup the LSP servers
 -- :h lspconfig-all contains a list of all the available servers
 -- the default configuration per server and where to find the full configuration options
-local lspconfig = require('lspconfig')
+-- calls to vim.lsp.config('<name>', {<config>}) will extend the config provided by nvim-lspconfig
+-- servers need to be explicitly enabled
+
 -- Lua
-lspconfig.lua_ls.setup {
+vim.lsp.config('lua_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -76,52 +79,25 @@ lspconfig.lua_ls.setup {
       telemetry = { enable = false },
     },
   }
-}
--- Python
--- https://github.com/python-lsp/python-lsp-server
--- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
--- lspconfig.pylsp.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
---   settings = {
---     pylsp = {
---       plugins = {
---         rope_autoimport = {
---           enabled = true
---         },
---         autopep8 = {
---           enabled = false
---         },
---         pycodestyle = {
---           enabled = false
---         },
---         pyflakes = {
---           enabled = true
---         },
---         pylsp_mypy = {
---           enabled = true,
---           report_progress = true,
---           dmypy = true
---         }
---       },
---     },
---   }
--- }
+})
+vim.lsp.enable('lua_ls')
 
 -- Python
 -- https://detachhead.github.io/basedpyright
 -- https://docs.basedpyright.com/#/settings
-lspconfig.basedpyright.setup {
+vim.lsp.config('basedpyright', {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     basedpyright = { analysis = { typeCheckingMode = "standard" } }
   },
-}
+})
+vim.lsp.enable('basedpyright')
+
 -- Rust
 -- https://github.com/rust-lang/rust-analyzer
 -- https://rust-analyzer.github.io/manual.html#configuration
-lspconfig.rust_analyzer.setup {
+vim.lsp.config('rust_analyzer', {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -136,18 +112,21 @@ lspconfig.rust_analyzer.setup {
       }
     }
   }
-}
+})
+vim.lsp.enable('rust_analyzer')
+
 -- TypeScript
 -- https://github.com/typescript-language-server/typescript-language-server
 -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
-lspconfig.ts_ls.setup {
+vim.lsp.config('ts_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
-}
+})
+vim.lsp.enable('ts_ls')
 
 -- CSS
 -- https://github.com/microsoft/vscode-css-languageservice
-lspconfig.cssls.setup {
+vim.lsp.config('cssls', {
   capabilities = capabilities,
   on_attach = on_attach,
   init_options = { provideFormatter = false },
@@ -162,28 +141,31 @@ lspconfig.cssls.setup {
       validate = true,
     },
   }
-}
+})
+vim.lsp.enable('cssls')
 
 -- HTML
-lspconfig.html.setup {
+vim.lsp.config('html', {
   capabilities = capabilities,
   on_attach = on_attach,
-}
+})
+vim.lsp.enable('html')
 
 -- CPP
 -- https://clangd.llvm.org/
 -- Don't forget to generate compile_commands.json
 -- cmake: -DCMAKE_EXPORT_COMPILE_COMMANDS=1 then simlink it to the root of the project
 -- https://clangd.llvm.org/installation#project-setup
-lspconfig.clangd.setup {
+vim.lsp.config('clangd', {
   capabilities = capabilities,
   on_attach = on_attach,
-}
+})
+vim.lsp.enable('clangd')
 
 -- YAML
 -- https://github.com/redhat-developer/yaml-language-server
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-lspconfig.yamlls.setup {
+vim.lsp.config('yamlls', {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -195,67 +177,72 @@ lspconfig.yamlls.setup {
       },
     },
   }
-}
+})
+vim.lsp.enable('yamlls')
 
 -- Helm
 -- https://github.com/mrjosh/helm-ls
-lspconfig.helm_ls.setup {
+vim.lsp.config('helm_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
-}
+})
+vim.lsp.enable('helm_ls')
 
 -- JSON
 -- https://github.com/hrsh7th/vscode-langservers-extracted
 -- extracted from: https://github.com/microsoft/vscode-json-languageservice
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
 -- https://github.com/Microsoft/vscode/blob/main/extensions/json-language-features/server/README.md#settings
-lspconfig.jsonls.setup {
+vim.lsp.config('jsonls', {
   capabilities = capabilities,
   on_attach = on_attach,
-}
+})
+vim.lsp.enable('jsonls')
 
 -- Terraform
 -- https://github.com/hashicorp/terraform-ls
 -- https://github.com/hashicorp/terraform-ls
-lspconfig.terraformls.setup {
+vim.lsp.config('terraformls', {
   capabilities = capabilities,
   on_attach = on_attach,
-}
+})
+vim.lsp.enable('terraformls')
 
-lspconfig.bashls.setup {
+vim.lsp.config('bashls', {
   capabilities = capabilities,
   on_attach = on_attach,
-}
+})
+vim.lsp.enable('bashls')
 
 -- Add additional pylsp dependencies
 -- https://github.com/williamboman/mason.nvim/blob/main/doc/reference.md#package
-local pylsp = require("mason-registry").get_package("python-lsp-server")
-pylsp:on(
-  "install:success",
-  vim.schedule_wrap(function(handle)
-    print("Installing pylsp dependencies")
-    --TODO: extract this function as it is also useful in DAP setup
-    local function mason_package_path(package)
-      local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
-      return path
-    end
-
-    local path = mason_package_path("python-lsp-server")
-    local command = path .. "/venv/bin/pip"
-    local args = {
-      "install",
-      "-U",
-      "rope",
-      "pylsp-mypy",
-      "python-lsp-ruff",
-    }
-
-    require("plenary.job")
-        :new({
-          command = command,
-          args = args,
-          cwd = path,
-        })
-        :start()
-  end)
-)
+-- local pylsp = require("mason-registry").get_package("python-lsp-server")
+-- pylsp:on(
+--   "install:success",
+--   vim.schedule_wrap(function(handle)
+--     print("Installing pylsp dependencies")
+--     --TODO: extract this function as it is also useful in DAP setup
+--     local function mason_package_path(package)
+--       local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
+--       return path
+--     end
+--
+--     local path = mason_package_path("python-lsp-server")
+--     local command = path .. "/venv/bin/pip"
+--     local args = {
+--       "install",
+--       "-U",
+--       "rope",
+--       "pylsp-mypy",
+--       "python-lsp-ruff",
+--     }
+--
+--     require("plenary.job")
+--         :new({
+--           command = command,
+--           args = args,
+--           cwd = path,
+--         })
+--         :start()
+--   end)
+-- )
