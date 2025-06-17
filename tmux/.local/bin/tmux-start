@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [ "$TMUX_SESSION" = "" ]; then
+if [[ $TMUX_SESSION = "" ]] || [[ $# -ne 0 ]];then
     tmux "$@"
     exit 0
 fi
