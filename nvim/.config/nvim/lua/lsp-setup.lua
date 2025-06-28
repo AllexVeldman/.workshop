@@ -208,11 +208,27 @@ vim.lsp.config('terraformls', {
 })
 vim.lsp.enable('terraformls')
 
+-- Bash
 vim.lsp.config('bashls', {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 vim.lsp.enable('bashls')
+
+-- Sphinx
+-- https://github.com/swyddfa/esbonio
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/esbonio.lua
+vim.lsp.config('esbonio', {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { 'esbonio' },
+  init_options = {
+    sphinx = {
+      buidCommand = { "sphinx-build", "-b", "html", "--fail-on-warning", "docs/", "docs/_build" }
+    },
+  },
+})
+vim.lsp.enable('esbonio')
 
 -- Add additional pylsp dependencies
 -- https://github.com/williamboman/mason.nvim/blob/main/doc/reference.md#package
