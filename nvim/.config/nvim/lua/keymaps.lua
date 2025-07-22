@@ -24,25 +24,7 @@ wk.add({
   },
 })
 
--- Diagnostic keymaps
-wk.add({
-  { '<leader>E', vim.diagnostic.open_float, desc = 'Open floating diagnostic message' },
-  { '<leader>q', vim.diagnostic.setloclist, desc = 'Open diagnostics list' },
-  {
-    mode = 'n',
-    {
-      '<leader>e',
-      function()
-        if vim.diagnostic.config().virtual_lines == false then
-          vim.diagnostic.config({ virtual_lines = { current_line = true } })
-        else
-          vim.diagnostic.config({ virtual_lines = false })
-        end
-      end,
-      desc = 'Toggle diagnostic virtual lines'
-    },
-  },
-})
+
 
 -- Keymaps so move-line works
 wk.add({

@@ -58,10 +58,45 @@ vim.o.termguicolors = true
 vim.wo.spell = true
 
 -- Diagnostic settings
+
+-- Remove ansi escape codes from a Diagnostic message
+-- Useful if for example test output contains color codes
+-- This allows a normal output window to show color but inline
+-- diagnostics to show up in just red
+--- @param s vim.Diagnostic
+--- @return string
+local function remove_ansi_escapes(s)
+  return s.message:gsub('\x1b%[%d+;%d+;%d+;%d+;%d+m', '')
+      :gsub('\x1b%[%d+;%d+;%d+;%d+m', '')
+      :gsub('\x1b%[%d+;%d+;%d+m', '')
+      :gsub('\x1b%[%d+;%d+m', '')
+      :gsub('\x1b%[%d+m', '')
+end
+
 vim.diagnostic.config({
-  float = { source = true },
+  float = { source = true, format = remove_ansi_escapes },
   -- Show diagnostics inline
-  virtual_text = true,
+  virtual_text = { format = remove_ansi_escapes },
+})
+
+-- Diagnostic keymaps
+require('which-key').add({
+  { '<leader>E', vim.diagnostic.open_float, desc = 'Open floating diagnostic message' },
+  { '<leader>q', vim.diagnostic.setloclist, desc = 'Open diagnostics list' },
+  {
+    mode = 'n',
+    {
+      '<leader>e',
+      function()
+        if vim.diagnostic.config().virtual_lines == false then
+          vim.diagnostic.config({ virtual_lines = { current_line = true, format = remove_ansi_escapes } })
+        else
+          vim.diagnostic.config({ virtual_lines = false })
+        end
+      end,
+      desc = 'Toggle diagnostic virtual lines'
+    },
+  },
 })
 
 -- Load .nvim.lua from CWD

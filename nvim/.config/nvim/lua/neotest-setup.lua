@@ -6,7 +6,8 @@ require("neotest").setup({
     require("neotest-python")({
       dap = { justMyCode = false },
       runner = "pytest",
-      args = { "-vv", "--color=no" },
+      args = { "-vv" },
+      pytest_discover_instances = true,
     }),
     require("neotest-rust")({}),
     require('neotest-jest')({}),
