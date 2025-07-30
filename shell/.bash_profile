@@ -35,6 +35,10 @@ if command -v docker &> /dev/null; then
     docker completion bash > $HOME/.local/share/bash-completion/completions/docker
 fi
 
+# Just
+# The Just completions for bash don't work the same way as the above
+# When installed using brew the completions are automatically added correctly.
+
 # homebrew
 if type brew &>/dev/null
 then
