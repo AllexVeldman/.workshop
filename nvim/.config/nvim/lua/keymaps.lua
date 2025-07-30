@@ -52,7 +52,7 @@ wk.add({
   }
 })
 
-wk.add({ "<C-w>m", ":tab split", desc = 'Split window into new tab' })
+wk.add({ "<C-w>m", ":tab split<CR>", desc = 'Split window into new tab' })
 
 -- document existing key chains
 require('which-key').add(
