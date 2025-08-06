@@ -9,6 +9,7 @@ alias dock-login='echo $GITHUB_TOKEN | docker login -u $GITHUB_USER --password-s
 alias listening-ports='lsof -i -P | grep -i "listen"'
 alias poetry-outdated="poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)"
 alias tmux='tmux-start'
+alias live-server='npx live-server'
 
 # gh aliases
 # if command -v gh &> /dev/null; then
