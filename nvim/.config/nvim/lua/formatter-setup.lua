@@ -6,6 +6,19 @@ vim.api.nvim_create_user_command('FormatToggle', function()
   print('Setting formatter autoformatting to: ' .. tostring(format_is_enabled))
 end, {})
 
+local function prettier()
+  return {
+    exe = "npx",
+    args = {
+      "prettier",
+      "--stdin-filepath",
+      util.escape_path(util.get_current_buffer_file_path()),
+    },
+    stdin = true,
+    try_node_modules = true,
+  }
+end
+
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 require("formatter").setup {
   -- Enable or disable logging
@@ -16,15 +29,11 @@ require("formatter").setup {
   filetype = {
     -- Requires prettier to be configured
     -- When using html templating, ensure you are using prettier-plugin-jinja-template
-    html = {
-      require("formatter.defaults.prettier"),
-    },
-    scss = {
-      require("formatter.defaults.prettier"),
-    },
-    javascript = {
-      require("formatter.defaults.prettier"),
-    },
+    html = { prettier },
+    scss = { prettier },
+    css = { prettier },
+    javascript = { prettier },
+
     python = {
       function()
         return {
