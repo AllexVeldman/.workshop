@@ -25,6 +25,8 @@ export EDITOR=nvim
 export GIT_EDITOR=nvim
 
 # Docker
+# Point docker to the rootless podman socket
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
