@@ -10,6 +10,7 @@ alias listening-ports='lsof -i -P | grep -i "listen"'
 alias poetry-outdated="poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)"
 alias tmux='tmux-start'
 alias live-server='npx live-server'
+alias docker-compose='/usr/libexec/docker/cli-plugins/docker-compose'
 
 # gh aliases
 # if command -v gh &> /dev/null; then
