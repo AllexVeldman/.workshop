@@ -10,6 +10,8 @@ alias listening-ports='lsof -i -P | grep -i "listen"'
 alias poetry-outdated="poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)"
 alias tmux='tmux-start'
 alias live-server='npx live-server'
+# Alias docker-compose to it's plugin
+# so we can bypass the podman wrapper
 alias docker-compose='/usr/libexec/docker/cli-plugins/docker-compose'
 
 # gh aliases
