@@ -123,6 +123,14 @@ vim.lsp.config('ts_ls', {
 })
 vim.lsp.enable('ts_ls')
 
+-- Eslint
+-- https://github.com/hrsh7th/vscode-langservers-extracted
+vim.lsp.config('eslint', {
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+vim.lsp.enable('eslint')
+
 -- CSS
 -- https://github.com/microsoft/vscode-css-languageservice
 vim.lsp.config('cssls', {
