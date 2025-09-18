@@ -5,7 +5,7 @@ alias gf="git fetch"
 alias gd="git diff"
 alias dock-up="docker compose up -d --remove-orphans"
 alias dock-down="docker compose down"
-alias dock-login='echo $GITHUB_TOKEN | docker login -u $GITHUB_USER --password-stdin ghcr.io'
+alias dock-login='echo $GITHUB_TOKEN | REGISTRY_AUTH_FILE="$HOME/.docker/config.json" docker login -u $GITHUB_USER --password-stdin ghcr.io'
 alias listening-ports='lsof -i -P | grep -i "listen"'
 alias poetry-outdated="poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)"
 alias tmux='tmux-start'
