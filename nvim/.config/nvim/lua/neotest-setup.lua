@@ -15,21 +15,21 @@ require("neotest").setup({
       -- jestCommand = "yarn test",
       -- jestConfigFile = "jest.config.mjs",
       -- cwd = function() return vim.fn.getcwd() end,
-      isTestFile = function(file_path)
-        if not file_path then
-          return false
-        end
-        -- The default only matches on files with extension, not "test.ts" or "spec.js"
-        for _, pattern in ipairs({ "test.[jt]sx?$", "spec.[jt]sx?$" }) do
-          if file_path:match(pattern) then
-            return true
-          end
-        end
-        if require("neotest-jest.jest-util").defaultIsTestFile(file_path) then
-          return true
-        end
-        return false
-      end
+      -- isTestFile = function(file_path)
+      --   if not file_path then
+      --     return false
+      --   end
+      --   -- The default only matches on files with extension, not "test.ts" or "spec.js"
+      --   for _, pattern in ipairs({ "test.[jt]sx?$", "spec.[jt]sx?$" }) do
+      --     if file_path:match(pattern) then
+      --       return true
+      --     end
+      --   end
+      --   if require("neotest-jest.jest-util").defaultIsTestFile(file_path) then
+      --     return true
+      --   end
+      --   return false
+      -- end
       -- jest_test_discovery = true,
     }),
   },
