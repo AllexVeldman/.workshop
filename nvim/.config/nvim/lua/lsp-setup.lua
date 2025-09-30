@@ -181,6 +181,7 @@ vim.lsp.config('yamlls', {
       schemas = {
         ["https://json.schemastore.org/github-workflow.json"] = { "/.github/workflows/*" },
         ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = { "docker-compose.yml", "docker-compose.yaml" },
+        ["https://www.schemastore.org/pre-commit-config.json"] = { ".pre-commit-config.yaml" },
       },
     },
   }
