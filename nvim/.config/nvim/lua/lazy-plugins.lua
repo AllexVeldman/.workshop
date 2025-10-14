@@ -153,34 +153,29 @@ require('lazy').setup({
         "nvim-tree/nvim-web-devicons",
       },
     },
+    -- Vim syntax for justfiles
     {
       "NoahTheDuke/vim-just",
       ft = { "just" },
     },
+    -- Run auto-formatting on specific file types
+    -- This is separate from any formatting the LSP can do
     "mhartington/formatter.nvim",
+    -- Run linters on specific file types
+    -- This is on top of lints the LSP might generate
     "mfussenegger/nvim-lint",
     -- nvim-highlight-colors
     -- Shows the color when it detects a color code
     -- https://github.com/brenoprata10/nvim-highlight-colors
-    {
-      "brenoprata10/nvim-highlight-colors",
-      opts = {
-        render = 'virtual',
-      },
-    },
+    -- {
+    --   "brenoprata10/nvim-highlight-colors",
+    --   opts = {
+    --     render = 'virtual',
+    --   },
+    -- },
     -- Format and highlight CSV
     "mechatroner/rainbow_csv",
-    -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-    --       These are some example plugins that I've included in the kickstart repository.
-    --       Uncomment any of the lines below to enable them.
-    -- require 'kickstart.plugins.autoformat',
-    -- require 'kickstart.plugins.debug',
 
-    -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-    --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-    --    up-to-date with whatever is in the kickstart repo.
-    --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-    --
     --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
     { import = 'plugins' },
   }
