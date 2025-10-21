@@ -33,6 +33,8 @@ require("formatter").setup {
     scss = { prettier },
     css = { prettier },
     javascript = { prettier },
+    typescript = { prettier },
+    typescriptreact = { prettier },
 
     python = {
       function()
