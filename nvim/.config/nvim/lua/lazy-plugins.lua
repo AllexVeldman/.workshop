@@ -57,13 +57,6 @@ require('lazy').setup({
       -- Autocompletion
       'hrsh7th/nvim-cmp',
       dependencies = {
-        -- Snippet Engine & its associated nvim-cmp source
-        'L3MON4D3/LuaSnip',
-        'saadparwaiz1/cmp_luasnip',
-
-        -- Adds LSP completion capabilities
-        -- TODO: Switch to builtin LSP completion support
-        --  https://gpanders.com/blog/whats-new-in-neovim-0-11/#builtin-auto-completion
         'hrsh7th/cmp-nvim-lsp',
       },
     },
