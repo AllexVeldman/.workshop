@@ -172,6 +172,16 @@ vim.lsp.enable('clangd')
 -- YAML
 -- https://github.com/redhat-developer/yaml-language-server
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
+--
+-- Is used by helm_ls to do schema validation on helm resources after templating
+-- To define a schema for a yaml file, add `# yaml-language-server: $schema=<path to schema>`
+-- to the top of the file.
+--
+-- https://schemastore.org is a good source of often used schemas
+-- https://github.com/datreeio/CRDs-catalog is a good source of k8s CRD schemas
+--
+-- example:
+-- # yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/gateway.networking.k8s.io/httproute_v1.json
 vim.lsp.config('yamlls', {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -190,6 +200,7 @@ vim.lsp.enable('yamlls')
 
 -- Helm
 -- https://github.com/mrjosh/helm-ls
+-- uses `yamlls` for schema validation of templated resources
 vim.lsp.config('helm_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
