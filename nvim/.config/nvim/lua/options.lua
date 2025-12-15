@@ -21,6 +21,9 @@ vim.o.mouse = 'a'
 -- Enable break indent
 vim.o.breakindent = true
 
+-- Add column stop indicator
+vim.o.colorcolumn = "88"
+
 -- Enable tabbreak
 vim.o.tabstop = 4
 vim.o.expandtab = true
