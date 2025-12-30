@@ -18,6 +18,7 @@ require('nvim-treesitter').install({
   'json',
   'toml',
   'graphql',
+  'yaml',
 })
 
 
