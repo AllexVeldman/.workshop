@@ -16,10 +16,10 @@ dapui.setup({
   }
 })
 dap.listeners.before.attach.dapui_config = function()
-  dapui.open()
+  -- dapui.open()
 end
 dap.listeners.before.launch.dapui_config = function()
-  dapui.open()
+  -- dapui.open()
 end
 
 local map = function(mode, keys, func, desc)
@@ -34,6 +34,10 @@ end
 map('n', '<leader>dr', require('telescope').extensions.dap.configurations, '[R]un')
 map('n', '<leader>dt', dapui.toggle, '[T]oggle the debug view')
 map('n', '<leader>bt', dap.toggle_breakpoint, '[T]oggle Breakpoint')
+map('n', '<leader>bc', function()
+  local condition = vim.fn.input("Condition: ")
+  dap.toggle_breakpoint(condition)
+end, 'Set [C]onditional Breakpoint')
 map('n', '<leader>bd', dap.clear_breakpoints, '[D]elete All Breakpoints')
 map('n', '<F5>', dap.continue, 'Continue')
 -- Keybindings during debug sessions
@@ -46,7 +50,8 @@ dap.listeners.after.event_initialized['custom.dap.keys'] = function()
   map('n', '<leader>ds', require('telescope').extensions.dap.frames, 'Call [S]tack')
   map('n', '<leader>du', dap.up, 'Stack [U]p')
   map('n', '<leader>dd', dap.down, 'Stack [D]own')
-  map('n', '<leader>dk', dap.stop, '[K]ill debug session')
+  map('n', '<leader>dk', dap.terminate, '[K]ill debug session')
+  map('n', '<leader>di', dap.repl.toggle, '[I]nteractive REPL')
 end
 local reset_keys = function()
   pcall(vim.keymap.del, 'n', '<F8>')
@@ -58,6 +63,7 @@ local reset_keys = function()
   pcall(vim.keymap.del, 'n', '<leader>du')
   pcall(vim.keymap.del, 'n', '<leader>dd')
   pcall(vim.keymap.del, 'n', '<leader>dk')
+  pcall(vim.keymap.del, 'n', '<leader>di')
 end
 dap.listeners.after.event_terminated['me.dap.keys'] = reset_keys
 dap.listeners.after.disconnect['me.dap.keys'] = reset_keys
