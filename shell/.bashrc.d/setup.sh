@@ -43,3 +43,8 @@ eval "$(direnv hook bash)"
 
 # homebrew
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+test -d $PYENV_ROOT/bin && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
