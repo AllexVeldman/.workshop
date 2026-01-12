@@ -76,6 +76,8 @@ vim.lsp.config('*', {
 
 -- Lua
 vim.lsp.config('lua_ls', {
+  capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -89,6 +91,8 @@ vim.lsp.enable('lua_ls')
 -- https://detachhead.github.io/basedpyright
 -- https://docs.basedpyright.com/#/settings
 vim.lsp.config('basedpyright', {
+  capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     basedpyright = { analysis = { typeCheckingMode = "standard" } }
   },
@@ -99,6 +103,8 @@ vim.lsp.enable('basedpyright')
 -- https://github.com/rust-lang/rust-analyzer
 -- https://rust-analyzer.github.io/manual.html#configuration
 vim.lsp.config('rust_analyzer', {
+  capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     ["rust-analyzer"] = {
       check = {
@@ -126,6 +132,8 @@ vim.lsp.enable('eslint')
 -- CSS
 -- https://github.com/microsoft/vscode-css-languageservice
 vim.lsp.config('cssls', {
+  capabilities = capabilities,
+  on_attach = on_attach,
   init_options = { provideFormatter = false },
   settings = {
     css = {
@@ -165,6 +173,8 @@ vim.lsp.enable('clangd')
 -- example:
 -- # yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/gateway.networking.k8s.io/httproute_v1.json
 vim.lsp.config('yamlls', {
+  capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     yaml = {
       schemaStore = { enable = false },
@@ -202,6 +212,8 @@ vim.lsp.enable('bashls')
 -- https://github.com/swyddfa/esbonio
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/esbonio.lua
 vim.lsp.config('esbonio', {
+  capabilities = capabilities,
+  on_attach = on_attach,
   cmd = { 'esbonio' },
   init_options = {
     sphinx = {
