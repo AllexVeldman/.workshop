@@ -3,6 +3,22 @@
 --
 require("neotest").setup({
   -- log_level = vim.log.levels.DEBUG,
+  discovery = {
+    -- limit test discovery to just a few processes
+    concurrent = 3,
+    enabled = true,
+    filter_dir = function (name, rel_path, root)
+      -- neotest discovery seems to be triggered on std when opening a std file
+      -- after starting another neotest discovery
+      -- causing a lot of processes trying( and succeeding) to find tests in the
+      -- used python.
+      -- Here I'm trying to get rid of those.
+      if string.find(root, ".pyenv", 1, true) then
+        return false
+      end
+      return true
+    end
+  },
   adapters = {
     require("neotest-python")({
       dap = { justMyCode = false },
