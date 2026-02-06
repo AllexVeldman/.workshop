@@ -25,7 +25,8 @@ vim.o.breakindent = true
 vim.o.colorcolumn = "88"
 
 -- Enable tabbreak
--- Will insert 4 spaces instead of a tab
+-- Will insert 4 spaces instead of a tab by default
+-- a .editorconfig file can override this
 vim.o.tabstop = 4
 vim.o.expandtab = true
 
