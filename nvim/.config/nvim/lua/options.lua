@@ -25,8 +25,14 @@ vim.o.breakindent = true
 vim.o.colorcolumn = "88"
 
 -- Enable tabbreak
+-- Will insert 4 spaces instead of a tab
 vim.o.tabstop = 4
 vim.o.expandtab = true
+
+-- show whitespace characters
+-- Replaces the use of a plugin like indent-blankline
+vim.o.listchars = 'tab:> ,leadmultispace:┊   '
+vim.o.list = true
 
 -- Save undo history
 vim.o.undofile = true
