@@ -5,9 +5,9 @@ require("neotest").setup({
   -- log_level = vim.log.levels.DEBUG,
   discovery = {
     -- limit test discovery to just a few processes
-    concurrent = 3,
+    concurrent = 12,
     enabled = true,
-    filter_dir = function (name, rel_path, root)
+    filter_dir = function(name, rel_path, root)
       -- neotest discovery seems to be triggered on std when opening a std file
       -- after starting another neotest discovery
       -- causing a lot of processes trying( and succeeding) to find tests in the
@@ -24,7 +24,8 @@ require("neotest").setup({
       dap = { justMyCode = false },
       runner = "pytest",
       args = { "-vv" },
-      pytest_discover_instances = true,
+      -- Enable this to discover parametrized tests, is a lot slower though
+      pytest_discover_instances = false,
     }),
     require("neotest-rust")({}),
     require('neotest-jest')({
