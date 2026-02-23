@@ -111,3 +111,10 @@ require('which-key').add({
 
 -- Load .nvim.lua from CWD
 vim.o.exrc = true
+
+-- Disable some vim.provider options
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0

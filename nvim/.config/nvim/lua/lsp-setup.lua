@@ -18,6 +18,7 @@ local on_attach = function(_, bufnr)
     map('n', keys, func, desc)
   end
 
+
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   -- <Alt-a> is å on Mac
@@ -25,14 +26,16 @@ local on_attach = function(_, bufnr)
   map({ 'n', 'v' }, '<M-a>', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  -- Map over the builtin `grr` so it used telescope instead of quickfix list
+  nmap('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- Documentation
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  map({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- Use CTRL-S in insert mode for signature help instead
+  -- map({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- LSP functionality
   -- nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
