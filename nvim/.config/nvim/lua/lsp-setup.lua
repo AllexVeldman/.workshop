@@ -71,12 +71,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- calls to vim.lsp.config('<name>', {<config>}) will extend the config provided by nvim-lspconfig
 -- servers need to be explicitly enabled
 
--- Set capabilities and on_attach for all clients
-vim.lsp.config('*', {
-  capabilities = capabilities,
-  on_attach = on_attach
-})
-
 -- Lua
 vim.lsp.config('lua_ls', {
   capabilities = capabilities,
@@ -126,10 +120,20 @@ vim.lsp.enable('rust_analyzer')
 -- TypeScript
 -- https://github.com/typescript-language-server/typescript-language-server
 -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
+vim.lsp.config('ts_ls', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('ts_ls')
 
 -- Eslint
 -- https://github.com/hrsh7th/vscode-langservers-extracted
+vim.lsp.config('eslint', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('eslint')
 
 -- CSS
@@ -153,6 +157,11 @@ vim.lsp.config('cssls', {
 vim.lsp.enable('cssls')
 
 -- HTML
+vim.lsp.config('html', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('html')
 
 -- CPP
@@ -160,6 +169,11 @@ vim.lsp.enable('html')
 -- Don't forget to generate compile_commands.json
 -- cmake: -DCMAKE_EXPORT_COMPILE_COMMANDS=1 then simlink it to the root of the project
 -- https://clangd.llvm.org/installation#project-setup
+vim.lsp.config('clangd', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('clangd')
 
 -- YAML
@@ -194,6 +208,11 @@ vim.lsp.enable('yamlls')
 -- Helm
 -- https://github.com/mrjosh/helm-ls
 -- uses `yamlls` for schema validation of templated resources
+vim.lsp.config('helm_ls', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('helm_ls')
 
 -- JSON
@@ -201,14 +220,29 @@ vim.lsp.enable('helm_ls')
 -- extracted from: https://github.com/microsoft/vscode-json-languageservice
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
 -- https://github.com/Microsoft/vscode/blob/main/extensions/json-language-features/server/README.md#settings
+vim.lsp.config('jsonls', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('jsonls')
 
 -- Terraform
 -- https://github.com/hashicorp/terraform-ls
 -- https://github.com/hashicorp/terraform-ls
+vim.lsp.config('terraformls', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('terraformls')
 
 -- Bash
+vim.lsp.config('bashls', {
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+
 vim.lsp.enable('bashls')
 
 -- Sphinx
