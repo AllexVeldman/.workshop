@@ -22,7 +22,7 @@ vim.o.mouse = 'a'
 vim.o.breakindent = true
 
 -- Add column stop indicator
-vim.o.colorcolumn = "88"
+vim.o.colorcolumn = "100"
 
 -- Enable tabbreak
 -- Will insert 4 spaces instead of a tab by default
