@@ -34,8 +34,8 @@ local on_attach = function(_, bufnr)
 
   -- Documentation
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  -- Use CTRL-S in insert mode for signature help instead
-  -- map({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- Use CTRL-S in insert and normal mode for signature help instead
+  map({ 'n', 'i' }, '<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- LSP functionality
   -- nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')

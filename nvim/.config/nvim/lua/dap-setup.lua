@@ -22,6 +22,18 @@ dap.listeners.before.launch.dapui_config = function()
   -- dapui.open()
 end
 
+
+-- DAP adapter for rust based on lldb
+dap.adapters.codelldb = {
+  type = "server",
+  port = "${port}",
+  executable = {
+    command = "codelldb",
+    args = { "--port", "${port}" },
+  },
+}
+
+
 local map = function(mode, keys, func, desc)
   if desc then
     desc = 'DAP: ' .. desc
