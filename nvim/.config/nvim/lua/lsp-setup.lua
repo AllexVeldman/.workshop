@@ -111,6 +111,11 @@ vim.lsp.config('rust_analyzer', {
         experimental = {
           enable = false
         }
+      },
+      cargo = {
+        -- Use a separate target dir for rust-analyser,
+        -- prevents a lock while rust_analyzer is running
+        targetDir = true
       }
     }
   }
