@@ -257,13 +257,15 @@ vim.lsp.config('esbonio', {
   capabilities = capabilities,
   on_attach = on_attach,
   cmd = { 'esbonio' },
-  init_options = {
-    sphinx = {
-      buidCommand = { "sphinx-build", "-b", "html", "--fail-on-warning", "docs/", "docs/_build" }
-    },
-  },
+  -- settings = {
+  --   esbonio = {
+  --     logging = {
+  --       level = 'debug',
+  --     }
+  --   }
+  -- }
 })
-vim.lsp.enable('esbonio')
+-- vim.lsp.enable('esbonio')
 
 -- Add additional pylsp dependencies
 -- https://github.com/williamboman/mason.nvim/blob/main/doc/reference.md#package
