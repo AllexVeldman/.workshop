@@ -32,6 +32,8 @@ require('lazy').setup({
         -- Additional lua configuration, makes nvim stuff amazing!
         {
           'folke/lazydev.nvim',
+          -- lazydev properly tags releases, use latest stable semver
+          version = "*",
           ft = "lua", -- only load on lua files
           opts = {},
         },
@@ -105,6 +107,8 @@ require('lazy').setup({
     -- Fuzzy Finder (files, lsp, etc)
     {
       'nvim-telescope/telescope.nvim',
+      -- telescope properly tags releases, use latest stable semver
+      version = "*",
       dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-dap.nvim',
@@ -146,6 +150,8 @@ require('lazy').setup({
     -- File Explorer for Neovim
     {
       "nvim-tree/nvim-tree.lua",
+      -- nvim-tree does proper release tagging, use the latest stable semver release.
+      version = "*",
       lazy = false,
       dependencies = {
         "nvim-tree/nvim-web-devicons",
