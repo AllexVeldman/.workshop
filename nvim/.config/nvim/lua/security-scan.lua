@@ -10,7 +10,18 @@ local list_plugins = function()
   end
   return plugins
 end
-vim.api.nvim_create_user_command('ListPlugins', function() vim.print(list_plugins()) end, {})
+
+-- User command to list all installed plugins
+vim.api.nvim_create_user_command(
+  'ListPlugins',
+  function()
+    local plugins = list_plugins()
+    for _, plug in pairs(plugins) do
+      vim.print(plug)
+    end
+  end,
+  {}
+)
 
 -- Query GitHub API for security advisories for a given repo
 local get_advisories = function(repo)

@@ -47,6 +47,11 @@ vim.o.hlsearch = true
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
 
+-- folding defaults
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo.foldenable = false
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300

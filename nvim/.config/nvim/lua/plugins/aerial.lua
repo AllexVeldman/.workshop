@@ -1,10 +1,10 @@
 -- [[ Install Aerial ]]
--- Adds the option to show a code outline for treesitter enabled languages
+-- Adds the option to show a code outline.
+-- Uses tree-sitter for tree-sitter enabled languages.
 return {
   'stevearc/aerial.nvim',
   -- Optional dependencies
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
     "nvim-tree/nvim-web-devicons"
   },
   config = function()

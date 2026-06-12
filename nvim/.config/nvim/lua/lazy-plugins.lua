@@ -126,14 +126,6 @@ require('lazy').setup({
         },
       },
     },
-
-    {
-      -- Highlight, edit, and navigate code
-      'nvim-treesitter/nvim-treesitter',
-      build = ':TSUpdate',
-      lazy = false,
-      enabled = true,
-    },
     {
       -- Test runners
       "nvim-neotest/neotest",
