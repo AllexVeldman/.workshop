@@ -28,6 +28,9 @@ local nio = require('nio')
 
 
 ---Resolve a notify function
+---
+---Uses fidget.notify if available.
+---Falls back to vim.notify if not.
 local function find_notify()
   local ok, fidget = pcall(require, 'fidget')
   if ok then
@@ -39,6 +42,7 @@ end
 
 local _notify = find_notify()
 
+---Show a notification to the user, with a default annotation
 local function notify(msg, level, opts)
   local default_opts = { annote = "TSInstall" }
   for k, v in pairs(opts) do default_opts[k] = v end
@@ -52,6 +56,7 @@ end
 ---@field enable boolean Add and start the parser for its filetype(s). Make sure you have the queries for it.
 
 
+---List of tree-sitter parsers to install when running `:TSInstall`
 ---@type TSParserConf[]
 local parsers = {
   {
@@ -110,14 +115,20 @@ local parsers = {
 ---Result is written to `$XDG_DATA_HOME/nvim/site/parser/<parser name>.so`
 ---`$XDG_DATA_HOME` defaults to `$HOME/.local/share`
 ---
----ref: https://wiki.archlinux.org/title/XDG_Base_Directory
+---ref:
+--- - https://wiki.archlinux.org/title/XDG_Base_Directory
+--- - https://tree-sitter.github.io/tree-sitter/cli/build.html
 ---
+---@async
 ---@param parser_conf TSParserConf Config of the parser to build
 ---@param src_dir string Location of the source to build
 local function build_parser(parser_conf, src_dir)
   notify("Building " .. parser_conf.name, nil, { key = parser_conf.name })
+
   local xdg_home = os.getenv('XDG_DATA_HOME') or os.getenv('HOME') .. '/.local/share'
   local out_dir = xdg_home .. "/nvim/site/parser" .. parser_conf.name .. ".so"
+
+  -- Build the parser
   local process = nio.process.run({
     cmd =
     'tree-sitter',
@@ -127,20 +138,28 @@ local function build_parser(parser_conf, src_dir)
       src_dir,
     }
   })
+
+  -- Check build result
   if process.result(false) ~= 0 then
     notify("failed to build " .. src_dir, vim.log.levels.ERROR, { key = parser_conf.name })
     vim.print(process.stderr.read())
   end
+
   process.close()
 end
 
+---Download the parser source
+---@async
 ---@param parser_conf TSParserConf Config of the parser to download
 ---@param cache_dir string Location to download the repo to
 ---@return string? src_dir Checkout directory
 local function download(parser_conf, cache_dir)
   notify("Downloading " .. parser_conf.name, nil, { key = parser_conf.name })
+
+  ---@type string?
   local checkout_dir = cache_dir .. '/tree-sitter-' .. parser_conf.name
 
+  -- Checkout the source directory
   local process = nio.process.run({
     cmd = 'git',
     args = {
@@ -152,11 +171,12 @@ local function download(parser_conf, cache_dir)
       checkout_dir,
     }
   })
+
+  -- Check process result
   if process.result(false) ~= 0 then
     notify("failed to download " .. parser_conf.repo, vim.log.levels.ERROR, { key = parser_conf.name })
     vim.print(process.stderr.read())
-    process.close()
-    return
+    checkout_dir = nil
   end
   process.close()
   return checkout_dir
@@ -164,11 +184,14 @@ end
 
 
 ---Install all defined parsers
+---@async
 local function ts_install()
   local cache_dir = fs.normalize(fn.stdpath('cache')) .. "/tree-sitter-parsers"
 
   -- Clear the cache dir so we always rebuild a clean download
   fs.rm(cache_dir, { recursive = true, force = true })
+
+  -- Build a list of functions to run in parallel
   local fns = {}
   for _, parser in pairs(parsers) do
     table.insert(fns,
@@ -180,6 +203,8 @@ local function ts_install()
         notify(parser.name .. ' Done', nil, { key = parser.name })
       end)
   end
+
+  -- Run all build in parallel
   nio.gather(fns)
 
   fs.rm(cache_dir, { recursive = true, force = true })
@@ -197,7 +222,7 @@ local function ts_start(parser_conf)
       pattern = parser_conf.name,
       callback = function(ev)
         vim.treesitter.start(ev.buf, parser_conf.name)
-        vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+        -- vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
       end
     })
   end

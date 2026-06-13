@@ -140,10 +140,10 @@
   (#lua-match? @type "^[A-Z]")
   (#lua-match? @constant "^[A-Z]"))
 
-[
+([
   (crate)
   (super)
-] @module
+] @keyword (#set! "priority" 130)) ; ensure priority beats the initial @lsp.namespace prio
 
 (scoped_use_list
   path: (identifier) @module)
@@ -317,7 +317,7 @@
     (crate)
     (super)
     (self)
-  ] @module)
+  ] @keyword)
 
 (visibility_modifier
   [
