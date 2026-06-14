@@ -18,6 +18,8 @@ local on_attach = function(_, bufnr)
     map('n', keys, func, desc)
   end
 
+  local tele_builtin = require('telescope.builtin')
+
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -25,17 +27,20 @@ local on_attach = function(_, bufnr)
   map({ 'n', 'v' }, 'å', vim.lsp.buf.code_action, '[C]ode [A]ction')
   map({ 'n', 'v' }, '<M-a>', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  nmap('gd', tele_builtin.lsp_definitions, '[G]oto [D]efinition')
   -- Map over the builtin `grr` so it used telescope instead of quickfix list
-  nmap('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('grr', tele_builtin.lsp_references, '[G]oto [R]eferences')
+  nmap('gI', tele_builtin.lsp_implementations, '[G]oto [I]mplementation')
+  nmap('gD', tele_builtin.lsp_type_definitions, '[G]oto Type [D]efinition')
+  nmap('<leader>ws', tele_builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- Documentation
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   -- Use CTRL-S in insert and normal mode for signature help instead
   map({ 'n', 'i' }, '<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+  -- Document
+  nmap('<leader>ds', tele_builtin.lsp_document_symbols, '[D]ocument [s]ymbols')
 
   -- LSP functionality
   -- nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
