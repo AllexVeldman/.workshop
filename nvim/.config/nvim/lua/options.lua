@@ -64,7 +64,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 })
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+-- menu: use a popup for completions
+-- menuone: also use popup when there is a single match
+-- noselect: do not insert until selected, and no item is pre-selected
+-- popup: Show extra info of the selection in a popup
+vim.o.completeopt = 'menu,menuone,noselect,popup'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true

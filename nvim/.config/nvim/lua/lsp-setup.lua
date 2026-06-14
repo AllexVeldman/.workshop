@@ -1,6 +1,6 @@
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -54,6 +54,16 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  -- Enable LSP auto-completions
+  vim.lsp.completion.enable(true, client.id, bufnr, {
+    autotrigger = true,
+    convert = function(item)
+      return { abbr = item.label:gsub('%b()', '') }
+    end,
+  })
+  -- Add Ctrl-Space as a shortcut for <C-x>_<C_O> (omnifunc completion)
+  vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "trigger LSP autocompletion" })
 end
 
 
@@ -66,9 +76,6 @@ require('mason-lspconfig').setup {
   ensure_installed = {}
 }
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup the LSP servers
 -- :h lspconfig-all contains a list of all the available servers
@@ -78,7 +85,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Lua
 vim.lsp.config('lua_ls', {
-  capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -93,7 +99,6 @@ vim.lsp.enable('lua_ls')
 -- https://detachhead.github.io/basedpyright
 -- https://docs.basedpyright.com/#/settings
 vim.lsp.config('basedpyright', {
-  capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     basedpyright = { analysis = { typeCheckingMode = "standard" } }
@@ -105,7 +110,6 @@ vim.lsp.enable('basedpyright')
 -- https://github.com/rust-lang/rust-analyzer
 -- https://rust-analyzer.github.io/manual.html#configuration
 vim.lsp.config('rust_analyzer', {
-  capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     ["rust-analyzer"] = {
@@ -131,7 +135,6 @@ vim.lsp.enable('rust_analyzer')
 -- https://github.com/typescript-language-server/typescript-language-server
 -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 vim.lsp.config('ts_ls', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -140,7 +143,6 @@ vim.lsp.enable('ts_ls')
 -- Eslint
 -- https://github.com/hrsh7th/vscode-langservers-extracted
 vim.lsp.config('eslint', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -149,7 +151,6 @@ vim.lsp.enable('eslint')
 -- CSS
 -- https://github.com/microsoft/vscode-css-languageservice
 vim.lsp.config('cssls', {
-  capabilities = capabilities,
   on_attach = on_attach,
   init_options = { provideFormatter = false },
   settings = {
@@ -168,7 +169,6 @@ vim.lsp.enable('cssls')
 
 -- HTML
 vim.lsp.config('html', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -180,7 +180,6 @@ vim.lsp.enable('html')
 -- cmake: -DCMAKE_EXPORT_COMPILE_COMMANDS=1 then simlink it to the root of the project
 -- https://clangd.llvm.org/installation#project-setup
 vim.lsp.config('clangd', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -200,7 +199,6 @@ vim.lsp.enable('clangd')
 -- example:
 -- # yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/gateway.networking.k8s.io/httproute_v1.json
 vim.lsp.config('yamlls', {
-  capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     yaml = {
@@ -219,7 +217,6 @@ vim.lsp.enable('yamlls')
 -- https://github.com/mrjosh/helm-ls
 -- uses `yamlls` for schema validation of templated resources
 vim.lsp.config('helm_ls', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -231,7 +228,6 @@ vim.lsp.enable('helm_ls')
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
 -- https://github.com/Microsoft/vscode/blob/main/extensions/json-language-features/server/README.md#settings
 vim.lsp.config('jsonls', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -241,7 +237,6 @@ vim.lsp.enable('jsonls')
 -- https://github.com/hashicorp/terraform-ls
 -- https://github.com/hashicorp/terraform-ls
 vim.lsp.config('terraformls', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -249,7 +244,6 @@ vim.lsp.enable('terraformls')
 
 -- Bash
 vim.lsp.config('bashls', {
-  capabilities = capabilities,
   on_attach = on_attach
 })
 
@@ -259,7 +253,6 @@ vim.lsp.enable('bashls')
 -- https://github.com/swyddfa/esbonio
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/esbonio.lua
 vim.lsp.config('esbonio', {
-  capabilities = capabilities,
   on_attach = on_attach,
   cmd = { 'esbonio' },
   -- settings = {

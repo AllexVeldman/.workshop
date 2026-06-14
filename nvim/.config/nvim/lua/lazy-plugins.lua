@@ -51,14 +51,6 @@ require('lazy').setup({
     },
     'mfussenegger/nvim-dap-python',
 
-    {
-      -- Autocompletion
-      'hrsh7th/nvim-cmp',
-      dependencies = {
-        'hrsh7th/cmp-nvim-lsp',
-      },
-    },
-
     -- Useful plugin to show you pending keybinds.
     { 'folke/which-key.nvim', opts = {} },
 
