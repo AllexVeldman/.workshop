@@ -126,7 +126,7 @@ local function build_parser(parser_conf, src_dir)
   notify("Building " .. parser_conf.name, nil, { key = parser_conf.name })
 
   local xdg_home = os.getenv('XDG_DATA_HOME') or os.getenv('HOME') .. '/.local/share'
-  local out_dir = xdg_home .. "/nvim/site/parser" .. parser_conf.name .. ".so"
+  local out_dir = xdg_home .. "/nvim/site/parser/" .. parser_conf.name .. ".so"
 
   -- Build the parser
   local process = nio.process.run({
