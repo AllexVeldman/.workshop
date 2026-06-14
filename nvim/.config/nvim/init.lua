@@ -18,7 +18,6 @@ require 'cmp-setup'
 require 'nvim-tree-setup'
 require 'security-scan'
 require 'formatter-setup'
-require 'lint-setup'
 
 
 -- The line beneath this is called `modeline`. See `:help modeline`

@@ -13,9 +13,6 @@ require('lazy').setup({
     -- Git related plugins
     'tpope/vim-fugitive',
 
-    -- Detect tabstop and shiftwidth automatically
-    -- 'tpope/vim-sleuth',
-
     -- NOTE: This is where your plugins related to LSP can be installed.
     --  The configuration is done in lsp-setup.lua
     {
@@ -156,19 +153,9 @@ require('lazy').setup({
     },
     -- Run auto-formatting on specific file types
     -- This is separate from any formatting the LSP can do
+    -- setup is done in `formatter-setup.lua`
     "mhartington/formatter.nvim",
-    -- Run linters on specific file types
-    -- This is on top of lints the LSP might generate
-    "mfussenegger/nvim-lint",
-    -- nvim-highlight-colors
-    -- Shows the color when it detects a color code
-    -- https://github.com/brenoprata10/nvim-highlight-colors
-    -- {
-    --   "brenoprata10/nvim-highlight-colors",
-    --   opts = {
-    --     render = 'virtual',
-    --   },
-    -- },
+
     -- Format and highlight CSV
     "mechatroner/rainbow_csv",
 
