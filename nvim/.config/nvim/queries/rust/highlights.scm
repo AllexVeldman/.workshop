@@ -534,3 +534,13 @@
     (array_expression
       (raw_string_literal
         (string_content) @string.regexp))))
+
+; TODO: comments
+(((line_comment) @_todo
+    (#match? @_todo "TODO: ")
+) @comment.todo (#set! "priority" 101))
+
+; SAFETY: comments
+(((line_comment) @_safety
+    (#match? @_safety "SAFETY: ")
+) @comment.note (#set! "priority" 101))
