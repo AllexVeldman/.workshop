@@ -18,6 +18,7 @@ require 'dap-setup'
 require 'nvim-tree-setup'
 require 'security-scan'
 require 'formatter-setup'
+require 'limit-buffers'
 
 
 -- The line beneath this is called `modeline`. See `:help modeline`
