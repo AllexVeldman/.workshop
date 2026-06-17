@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 -- menuone: also use popup when there is a single match
 -- noselect: do not insert until selected, and no item is pre-selected
 -- popup: Show extra info of the selection in a popup
-vim.o.completeopt = 'menu,menuone,noselect,popup'
+vim.o.completeopt = 'menu,menuone,noselect,popup,fuzzy'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
