@@ -264,3 +264,6 @@ vim.lsp.config('esbonio', {
   -- }
 })
 -- vim.lsp.enable('esbonio')
+
+-- disable LSP logs since they are quite chatty
+vim.lsp.log.set_level(vim.log.levels.OFF)
