@@ -3,6 +3,11 @@
 ; or per git repo.
 
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
 [core]
-	excludesFile = ~/.config/git/ignore
+    excludesFile = ~/.config/git/ignore
+[diff]
+    tool = nvimdiff
+    guitool = nvimdiff
+[merge]
+    tool = nvimdiff

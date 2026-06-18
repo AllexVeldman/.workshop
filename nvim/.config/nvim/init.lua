@@ -4,21 +4,21 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-require 'lazy-bootstrap'
-require 'lazy-plugins'
-require 'options'
-require 'keymaps'
+require 'plugins'
+
+require 'dap-setup'
+require 'formatter-setup'
 require 'highlight-yank'
+require 'keymaps'
+require 'limit-buffers'
+require 'lsp-autoformat-setup'
+require 'lsp-setup'
+require 'neotest-setup'
+require 'nvim-tree-setup'
+require 'options'
+require 'security-scan'
 require 'telescope-setup'
 require 'treesitter-setup'
-require 'neotest-setup'
-require 'lsp-setup'
-require 'lsp-autoformat-setup'
-require 'dap-setup'
-require 'nvim-tree-setup'
-require 'security-scan'
-require 'formatter-setup'
-require 'limit-buffers'
 
 
 -- The line beneath this is called `modeline`. See `:help modeline`
