@@ -544,3 +544,10 @@
 (((line_comment) @_safety
     (#match? @_safety "SAFETY: ")
 ) @comment.note (#set! "priority" 101))
+
+; Self as call expression
+; priority needs to beat the lsp 125
+(call_expression
+    function: ((identifier) @_call_ident
+    (#eq? @_call_ident "Self")
+) @type (#set! "priority" 130))
