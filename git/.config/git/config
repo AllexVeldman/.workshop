@@ -1,0 +1,8 @@
+; This file contains the configuration applicable to any system I develop on
+; Things like `user.name` and `user.email` need to be set per-system in `~/.gitignore`
+; or per git repo.
+
+[push]
+	autoSetupRemote = true
+[core]
+	excludesFile = ~/.config/git/ignore

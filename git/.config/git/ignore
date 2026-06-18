@@ -1,0 +1,4 @@
+.envrc
+.nvim.lua
+.vscode/
+.tool-versions
