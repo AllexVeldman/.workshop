@@ -51,9 +51,11 @@ end
 
 ---@class TSParserConf
 ---@field name string Name of the parser
+---@field filetypes string[]? filetypes to start this parser for, defaults to `name`
 ---@field repo string Git repo of the parser
+---@field path? string Sub-directory of the repo to build, defaults to the root
 ---@field version string Version or branch to checkout
----@field enable boolean Add and start the parser for its filetype(s). Make sure you have the queries for it.
+---@field enable boolean Load the parser for its filetypes, disables the legacy syntax parsing
 
 
 ---List of tree-sitter parsers to install when running `:TSInstall`
@@ -81,14 +83,24 @@ local parsers = {
     name = 'javascript',
     repo = 'https://github.com/tree-sitter/tree-sitter-javascript.git',
     version = 'v0.25.0',
-    enable = false,
+    enable = true,
   },
-  -- {
-  --   name = 'typescript',
-  --   repo = 'https://github.com/tree-sitter/tree-sitter-typescript.git',
-  --   version = 'v0.23.2',
-  --   enable = false,
-  -- },
+  -- tree-sitter-typescript contains both typescript and tsx
+  {
+    name = 'typescript',
+    repo = 'https://github.com/tree-sitter/tree-sitter-typescript.git',
+    path = 'typescript',
+    version = 'v0.23.2',
+    enable = true,
+  },
+  {
+    name = 'tsx',
+    filetypes = { 'typescriptreact' },
+    repo = 'https://github.com/tree-sitter/tree-sitter-typescript.git',
+    path = 'tsx',
+    version = 'v0.23.2',
+    enable = true,
+  },
   {
     name = 'bash',
     repo = 'https://github.com/tree-sitter/tree-sitter-bash.git',
@@ -99,7 +111,13 @@ local parsers = {
     name = 'json',
     repo = 'https://github.com/tree-sitter/tree-sitter-json.git',
     version = 'v0.24.8',
-    enable = false,
+    enable = true,
+  },
+  {
+    name = 'json5',
+    repo = 'https://github.com/Joakker/tree-sitter-json5.git',
+    version = 'v0.1.0',
+    enable = true,
   },
   {
     name = 'html',
@@ -126,7 +144,10 @@ local function build_parser(parser_conf, src_dir)
   notify("Building " .. parser_conf.name, nil, { key = parser_conf.name })
 
   local xdg_home = os.getenv('XDG_DATA_HOME') or os.getenv('HOME') .. '/.local/share'
-  local out_dir = xdg_home .. "/nvim/site/parser/" .. parser_conf.name .. ".so"
+  local out_name = xdg_home .. "/nvim/site/parser/" .. parser_conf.name .. ".so"
+
+  -- build a sub-directory of the repo, if provided
+  local path = parser_conf.path or ''
 
   -- Build the parser
   local process = nio.process.run({
@@ -134,8 +155,8 @@ local function build_parser(parser_conf, src_dir)
     'tree-sitter',
     args = {
       'build',
-      '-o', out_dir,
-      src_dir,
+      '-o', out_name,
+      src_dir .. '/' .. path,
     }
   })
 
@@ -148,7 +169,7 @@ local function build_parser(parser_conf, src_dir)
   process.close()
 end
 
----Download the parser source
+---Download the parser source into the cache dir
 ---@async
 ---@param parser_conf TSParserConf Config of the parser to download
 ---@param cache_dir string Location to download the repo to
@@ -218,8 +239,17 @@ vim.api.nvim_create_user_command('TSInstall', function() nio.run(ts_install) end
 ---@param parser_conf TSParserConf Parser to start
 local function ts_start(parser_conf)
   if parser_conf.enable then
+    if parser_conf.filetypes then
+      -- Register the parser for the provided filetypes
+      for _, ft in ipairs(parser_conf.filetypes) do
+        vim.treesitter.language.register(parser_conf.name, ft)
+      end
+    end
+
+    -- Start the parser when the filetype of the parser is opened.
+    -- will by default match the parser name, but can be changed with the `filetypes` key
     vim.api.nvim_create_autocmd('FileType', {
-      pattern = parser_conf.name,
+      pattern = parser_conf.filetypes or parser_conf.name,
       callback = function(ev)
         vim.treesitter.start(ev.buf, parser_conf.name)
         -- vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
