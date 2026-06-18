@@ -106,11 +106,6 @@
       "src": "https://github.com/nvim-telescope/telescope.nvim",
       "version": "0.2.1 - 0.2.1"
     },
-    "vim-fugitive": {
-      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
-      "src": "https://github.com/tpope/vim-fugitive",
-      "version": "3.17.0 - 3.17.0"
-    },
     "vim-helm": {
       "rev": "2c8525fd98e57472769d137317bca83e477858ce",
       "src": "https://github.com/towolf/vim-helm"

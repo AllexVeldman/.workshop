@@ -15,8 +15,6 @@ vim.pack.add({
   -- Change the status line
   { src = gh('nvim-lualine/lualine.nvim') },
 
-  -- Add the :Git command some git related tools
-  { src = gh('tpope/vim-fugitive'),               version = vim.version.range('3.17.0') },
   -- Adds git related signs to the gutter and some change utilities
   { src = gh('lewis6991/gitsigns.nvim'),          version = vim.version.range('2.1.0') },
 
