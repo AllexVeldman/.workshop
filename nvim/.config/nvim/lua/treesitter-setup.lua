@@ -17,10 +17,7 @@ local fn = vim.fn
 local nio = require('nio')
 
 -- require('nvim-treesitter').install({
---   'cpp',
 --   'go',
---   'tsx',
---   'typescript',
 --   'toml',
 --   'graphql',
 --   'yaml',
@@ -123,6 +120,12 @@ local parsers = {
     name = 'html',
     repo = 'https://github.com/tree-sitter/tree-sitter-html.git',
     version = 'v0.23.2',
+    enable = true,
+  },
+  {
+    name = 'regex',
+    repo = 'https://github.com/tree-sitter/tree-sitter-regex.git',
+    version = 'v0.25.0',
     enable = true,
   },
 }
