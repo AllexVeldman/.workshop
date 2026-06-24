@@ -1,6 +1,6 @@
-; Forked from https://github.com/nvim-treesitter/nvim-treesitter/blob/4916d6592ede8c07973490d9322f187e07dfefac/runtime/queries/cpp/highlights.scm
-
 ; inherits: c
+
+; Forked from https://github.com/nvim-treesitter/nvim-treesitter/blob/4916d6592ede8c07973490d9322f187e07dfefac/runtime/queries/cpp/highlights.scm
 
 ((identifier) @variable.member
   (#lua-match? @variable.member "^m_.*$"))
