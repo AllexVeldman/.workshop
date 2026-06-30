@@ -40,7 +40,7 @@ local on_attach = function(client, bufnr)
   map({ 'n', 'i' }, '<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Document
-  nmap('<leader>ds', tele_builtin.lsp_document_symbols, '[D]ocument [s]ymbols')
+  -- nmap('<leader>ds', tele_builtin.lsp_document_symbols, '[D]ocument [s]ymbols')
 
   -- LSP functionality
   -- nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
