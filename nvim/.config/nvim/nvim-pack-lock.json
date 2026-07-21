@@ -77,7 +77,7 @@
       "version": "1.10.1 - 1.10.1"
     },
     "nvim-tree.lua": {
-      "rev": "85d1145ac71c1b8e1423862c78165a1f609faf60",
+      "rev": "4213bd6eabac38b16dd6615002b6243b23cf3bf6",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-web-devicons": {
