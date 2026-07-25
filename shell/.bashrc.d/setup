@@ -1,6 +1,4 @@
-# setup.sh
-#
-# Run by /etc/.bashrc on every new shell
+# sourced by ~/.sourceme on every new shell
 
 export LANG=en_GB.UTF-8
 
@@ -21,15 +19,18 @@ PROMPT_DIRECTORY='\W$(__git_ps1 " (%s)")'
 
 # Bash-completion
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
+    source /usr/share/bash-completion/bash_completion
 
 # Editors
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
 # Docker
-# Point docker to the rootless podman socket
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+if command -v podman &> /dev/null
+then
+    # Point docker to the rootless podman socket
+    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+fi
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
@@ -48,6 +49,11 @@ eval "$(direnv hook bash)"
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-test -d $PYENV_ROOT/bin && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
+if command -v pyenv &> /dev/null
+then
+    export PYENV_ROOT="$HOME/.pyenv"
+    test -d $PYENV_ROOT/bin && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init - bash)"
+fi
+
+# vim: set filetype=sh:

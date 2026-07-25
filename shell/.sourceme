@@ -1,0 +1,22 @@
+# Sourced by .bashrc or any other new-shell entrypoint
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# User specific aliases and functions
+if [ -d $HOME/.bashrc.d ]; then
+    for rc in $HOME/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            source "$rc"
+        fi
+    done
+fi
+unset rc
+
+# Indicator everything is setup
+export ALLEX_WORKSHOP="ready"
+
+# vim: set filetype=sh:
