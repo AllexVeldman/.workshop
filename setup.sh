@@ -1,18 +1,26 @@
+#!/usr/bin/env bash
 # Setup the system, should be run at-least once
 
 # Install required packages from OS package manager
-echo "[.workshop]: Installing packages"
+
+set -e
 
 PACKAGES="stow tmux direnv ripgrep"
 
-if command -v dnf &> /dev/null
+# Install the packages if not already installed
+if ! command -v tmux &> /dev/null
 then
-    # Fedora
-    sudo dnf install $PACKAGES
-elif command -v apt-get &> /dev/null
-then
-    # Ubuntu
-    sudo apt-get install $PACKAGES
+    echo "[.workshop]: Installing packages"
+    if command -v dnf &> /dev/null
+    then
+        # Fedora
+        sudo dnf install $PACKAGES
+    elif command -v apt-get &> /dev/null
+    then
+        # Ubuntu
+        sudo apt-get update
+        sudo apt-get install $PACKAGES
+    fi
 fi
 
 if ! command -v nvim &> /dev/null
