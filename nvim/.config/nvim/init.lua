@@ -4,6 +4,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+require 'options'
+
 require 'plugins'
 
 require 'dap-setup'
@@ -15,7 +17,6 @@ require 'lsp-autoformat-setup'
 require 'lsp-setup'
 require 'neotest-setup'
 require 'nvim-tree-setup'
-require 'options'
 require 'security-scan'
 require 'telescope-setup'
 require 'treesitter-setup'

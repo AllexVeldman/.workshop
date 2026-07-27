@@ -2,6 +2,27 @@
 
 -- Keymaps for better default experience
 local wk = require('which-key')
+
+-- Diagnostic keymaps
+wk.add({
+  { '<leader>E', vim.diagnostic.open_float, desc = 'Open floating diagnostic message' },
+  { '<leader>q', vim.diagnostic.setloclist, desc = 'Open diagnostics list' },
+  {
+    mode = 'n',
+    {
+      '<leader>e',
+      function()
+        if vim.diagnostic.config().virtual_lines == false then
+          vim.diagnostic.config({ virtual_lines = { current_line = true, format = remove_ansi_escapes } })
+        else
+          vim.diagnostic.config({ virtual_lines = false })
+        end
+      end,
+      desc = 'Toggle diagnostic virtual lines'
+    },
+  },
+})
+
 wk.add({ mode = { 'n', 'v' }, '<Space>', '<Nop>', silent = true })
 
 -- Remap for dealing with word wrap
