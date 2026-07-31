@@ -1,6 +1,6 @@
 # sourced by ~/.sourceme on every new shell
 
-export LANG=en_GB.UTF-8
+export LANG=C.UTF-8
 
 # Prompt
 # https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
