@@ -1,6 +1,7 @@
 # sourced by ~/.sourceme on every new shell
 #
 # Aliases
+alias ll="ls -la"
 alias gp="git pull"
 alias gs="git status"
 alias gf="git fetch"
